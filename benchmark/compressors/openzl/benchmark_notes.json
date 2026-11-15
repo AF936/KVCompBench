@@ -1,6 +1,0 @@
-{
-  "openzl": {
-    "zh": "GPU 路径适配受支持的 Serial/Zstd 图，使用共享 nvCOMP Zstd 解码；原样存储段计为 GPU 复制。不是完整通用 OpenZL GPU 解码器。",
-    "en": "GPU adaptation supports Serial/Zstd through nvCOMP; stored streams use GPU copy. This is not a general OpenZL GPU decoder."
-  }
-}

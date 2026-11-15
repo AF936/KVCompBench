@@ -1,6 +1,0 @@
-{
-  "splitzip": {
-    "zh": "使用官方 GPU 内核。编码计算窗口包含逐块校准；码本保存、封装和回传不计时。批量解码采用官方内核排队执行，不是原生单次批量接口。",
-    "en": "Official GPU kernels. Encoding includes per-block calibration; codebook serialization, framing and transfers are excluded. Decoding queues official kernels."
-  }
-}
