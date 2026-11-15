@@ -1,0 +1,11 @@
+{
+  "lz4": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-lz4-block-raw",
+      "packages": [
+        "lz4"
+      ]
+    }
+  }
+}

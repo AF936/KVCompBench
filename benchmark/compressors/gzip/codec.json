@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "gzip",
+      "kind": "builtin",
+      "codec": "gzip",
+      "gpu_backend": {
+        "type": "shared",
+        "backend": "nvcomp-gzip-raw",
+        "frame_version": 1
+      }
+    }
+  ]
+}

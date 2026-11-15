@@ -1,0 +1,6 @@
+{
+  "huff0": {
+    "zh": "内部子块最大 128 KiB。较大的外层块自动分段，分段头计入压缩大小，解码后拼回完整外层块。",
+    "en": "Internal subframes are limited to 128 KiB; larger outer blocks are segmented, with headers included in compressed size."
+  }
+}

@@ -1,0 +1,11 @@
+numpy==1.26.4
+zstandard==0.25.0
+lz4==4.4.5
+python-snappy>=0.7,<1
+openzl==0.3.0
+safetensors>=0.4,<1
+wheel
+packaging
+setuptools<81
+nvidia-nvcomp-cu13==6.0.0.12
+xxhash>=3,<4
