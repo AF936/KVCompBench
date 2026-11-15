@@ -15,27 +15,3 @@ raw_results/
 *.bin
 *.key
 *.pem
-
-# Machine-local benchmark artifacts
-.venvs/
-.runtime/
-.updates/
-.triton_cache/
-**/.runtime/
-benchmark/output/*
-!benchmark/output/.gitkeep
-benchmark/input/*
-!benchmark/input/.gitkeep
-*.jsonl
-*.log
-*.bak
-*.before_*
-*.tar.gz
-*.whl
-*.so
-*.dll
-*.pyd
-*.o
-*.class
-*.jar
-*.jsonpart

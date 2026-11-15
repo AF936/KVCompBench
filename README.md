@@ -36,14 +36,14 @@ The first lossless study uses FP8 KV payload exports from Qwen and DeepSeek and 
 | Area | Status |
 | --- | --- |
 | FP8 technical study and benchmark methodology | **Published** |
-| Linux BF16 lossless benchmark harness | Source released; FP8 harness integration remains planned |
-| Machine-readable BF16 results | RTX 5090 reference run released |
+| Reproducible BF16 / FP8 lossless benchmark harness | Planned |
+| Machine-readable full benchmark results | Planned |
 | Independent prompts / trace-based validation | Planned |
 | LMCache and other backend adapters | Planned |
 | End-to-end L2 retrieval measurements | Planned |
 | Other KV compression approaches | Future scope; not yet implemented |
 
-**Scope note:** The current focus is **lossless compression**. This first release includes the technical article and figures. The Linux BF16 harness and a machine-readable reference result are now available below. Raw KV captures are not distributed; the FP8 article is a separate study and does not imply FP8 execution support in this harness.
+**Scope note:** The current focus is **lossless compression**. This first release includes the technical article and figures. Benchmark scripts, raw KV captures, and machine-readable full experiment results are **not yet published**. We will add them separately once their packaging and reproducibility have been reviewed.
 
 ## Collaboration
 
@@ -61,23 +61,3 @@ The published FP8 article includes a small page-view counter and a like button a
 - **Privacy:** Browsers call the counter provider over HTTPS; this site does not collect visitor identities or set tracking cookies.
 
 The counters degrade quietly if the external service is unavailable.
-
-## Linux BF16 benchmark harness
-
-The [benchmark guide](benchmark/ReadMe.md) documents configuration, CPU/GPU paths, timing and JSONL resume. The [RTX 5090 reference result](examples/results/rtx5090_bf16_20261115/heatmap.html) contains 80 dataset/path measurements with CPU/GPU decoder selection. [CSV](examples/results/rtx5090_bf16_20261115/result.csv) and [run metadata](examples/results/rtx5090_bf16_20261115/metadata.json) accompany the report. Download the HTML file to open it offline.
-
-```bash
-# Linux x86-64; Python 3.10-3.12, a C compiler, and a CUDA-13-compatible driver.
-bash setup_paper_codecs.sh
-# Place contiguous BF16 .pt tensors in benchmark/input/ and edit settings.txt.
-CUDA_VISIBLE_DEVICES=0 .venvs/linux-x86_64-paper-cuda13/bin/python \
-  benchmark/run_full_cpu_encode_gpu_decode.py --output benchmark/output/my_run
-```
-
-Only use an assigned GPU on shared systems. The runner reads `benchmark/settings.txt`; an example configuration is included. The output directory must stay under `benchmark/output/`.
-
-`result.csv` is output only. `progress.jsonl` retains verified block transactions, and each `job_*.json` describes the input, codec and execution fingerprint. Independent plugins do not invalidate each other's matching records. Missing decoder implementations are displayed as `/`, never substituted with another algorithm.
-
-The published run covers two BF16 inputs and 40 encoding/decoding configurations. Raw KV tensors, virtual environments, compiled binaries and block journals are excluded. The reference result cannot reproduce the original private inputs by itself. Linux is the supported release target; Windows and FP8 are not claimed as validated harness targets. Packaging checks do not constitute a clean-machine GPU rerun.
-
-Third-party vendored sources retain their upstream licenses. Dependency versions and source checksums are recorded in manifests; installers download dependencies rather than committing environment files.
