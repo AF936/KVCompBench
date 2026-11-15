@@ -1,0 +1,13 @@
+{
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "platform": "Linux x86_64",
+  "timing_version": "codec_call_v2",
+  "cpu_workers": 1,
+  "decode_batch_blocks": 256,
+  "raw_input_included": false,
+  "configurations": 40,
+  "datasets": 2,
+  "result_rows": 80,
+  "scope": "Historical full BF16 run; not an FP8 execution claim",
+  "checkpoint_included": false
+}

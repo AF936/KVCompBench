@@ -1,0 +1,9 @@
+{
+  "gzip": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-gzip-raw",
+      "packages": []
+    }
+  }
+}

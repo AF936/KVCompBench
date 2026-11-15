@@ -1,0 +1,11 @@
+{
+  "snappy": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-snappy-raw",
+      "packages": [
+        "python-snappy"
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "delta-zstd",
+      "kind": "python",
+      "version": "1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu"
+    }
+  ]
+}
