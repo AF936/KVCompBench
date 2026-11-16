@@ -1,0 +1,1 @@
+nvidia-nvcomp-cu13==6.0.0.12

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "custom-zstd-cli",
+      "kind": "command",
+      "version": "1",
+      "compress": [
+        "zstd",
+        "-q",
+        "-f",
+        "{input}",
+        "-o",
+        "{output}"
+      ],
+      "decompress": [
+        "zstd",
+        "-q",
+        "-d",
+        "-f",
+        "{input}",
+        "-o",
+        "{output}"
+      ],
+      "timeout_seconds": 60,
+      "device": "cpu"
+    }
+  ]
+}

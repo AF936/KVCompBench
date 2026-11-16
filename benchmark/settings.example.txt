@@ -1,0 +1,27 @@
+# Copy to settings.txt and edit locally. KV page sizes override flat block bytes.
+[environment]
+name = linux-x86_64-basic-cpu
+
+[benchmark_datasets]
+deepseek_bf16.pt = 131072
+qwen_bf16.pt = 524288
+
+[benchmark]
+cpu_encode_threads = 1
+decode_batch_blocks = 256
+codec_set = core
+execution_device = cpu
+skip_unavailable_codecs = false
+
+[dataset:qwen_bf16.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+
+[dataset:deepseek_bf16.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+

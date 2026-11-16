@@ -1,0 +1,29 @@
+{
+  "zstd:1": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
+      "packages": [
+        "zstandard"
+      ]
+    }
+  },
+  "zstd:3": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
+      "packages": [
+        "zstandard"
+      ]
+    }
+  },
+  "zstd:9": {
+    "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
+      "packages": [
+        "zstandard"
+      ]
+    }
+  }
+}

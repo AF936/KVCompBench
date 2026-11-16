@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "identity",
+      "kind": "builtin",
+      "codec": "identity"
+    }
+  ]
+}
