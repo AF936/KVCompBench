@@ -70,3 +70,8 @@ python3 benchmark/html_report.py benchmark/output/core_full
 结果、数据、虚拟环境和本机配置不随仓库发布。根目录的安装与运行统一使用 `kvbench.py`，不再提供独立平台包装脚本。
 
 新增 codec 在自己的目录声明 API、设备、帧格式、批量能力和依赖；兼容 CPU 解码声明使用 `decode_backends.json`，共享帧提供者使用 `frame_provider.json`。公共 runner 负责选择、调度、计时和正确性校验。
+
+
+## 已发布结果
+
+[2026-11-17 经典 BF16 CPU/GPU 全量结果](results/2026-11-17-classic-bf16/README.md)：26 项路径配置，72,618 块全部通过逐字节验证。结果快照不包含输入数据或本机配置。
