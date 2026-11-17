@@ -1,0 +1,150 @@
+#include "streamvbyte.h"
+#include "streamvbyte_isadetection.h"
+
+#include "streamvbyte_endian.h"
+#include <string.h> // for memcpy
+
+#ifdef __clang__
+#pragma clang diagnostic ignored "-Wdeclaration-after-statement"
+#endif
+
+#ifdef STREAMVBYTE_IS_ARM64
+#include "streamvbyte_arm_decode.c"
+#endif
+
+#ifdef STREAMVBYTE_X64
+#include "streamvbyte_x64_decode.c"
+#endif // STREAMVBYTE_X64
+
+static inline uint32_t svb_decode_data(const uint8_t **dataPtrPtr, uint8_t code) {
+  const uint8_t *dataPtr = *dataPtrPtr;
+  uint32_t val;
+
+  if (code == 0) { // 1 byte
+    val = (uint32_t)*dataPtr;
+    dataPtr += 1;
+  } else if (code == 1) { // 2 bytes
+    val = svb_load_le(dataPtr, 2);
+    dataPtr += 2;
+  } else if (code == 2) { // 3 bytes
+    val = svb_load_le(dataPtr, 3);
+    dataPtr += 3;
+  } else { // code == 3
+    val = svb_load_le(dataPtr, 4);
+    dataPtr += 4;
+  }
+
+  *dataPtrPtr = dataPtr;
+  return val;
+}
+static const uint8_t *svb_decode_scalar(uint32_t *outPtr, const uint8_t *keyPtr,
+                                        const uint8_t *dataPtr,
+                                        uint32_t count) {
+  if (count == 0)
+    return dataPtr; // no reads or writes if no data
+
+  uint8_t shift = 0;
+  uint32_t key = *keyPtr++;
+  for (uint32_t c = 0; c < count; c++) {
+    if (shift == 8) {
+      shift = 0;
+      key = *keyPtr++;
+    }
+    uint32_t val = svb_decode_data(&dataPtr, (key >> shift) & 0x3);
+    *outPtr++ = val;
+    shift += 2;
+  }
+
+  return dataPtr; // pointer to first unused byte after end
+}
+
+// Read count 32-bit integers in Stream VByte format from in, storing the result
+// in out.  Returns the number of bytes read.
+static inline size_t svb_decode(const uint8_t *in, uint32_t *out, uint32_t count,
+                                uint32_t simd_count) {
+  if (count == 0)
+    return 0;
+
+  const uint8_t *keyPtr = in;               // full list of keys is next
+  uint32_t keyLen = count / 4 + (count % 4 != 0); // 2-bits per key (rounded up)
+  const uint8_t *dataPtr = keyPtr + keyLen; // data starts at end of keys
+
+#ifdef STREAMVBYTE_X64
+  if(streamvbyte_sse41()) {
+    simd_count &= ~31U;
+    dataPtr = svb_decode_sse41_simple(out, keyPtr, dataPtr, simd_count);
+    out += simd_count;
+    keyPtr += simd_count / 4;
+    count -= simd_count;
+  }
+#elif defined(STREAMVBYTE_IS_ARM64)
+  simd_count &= ~3U;
+  dataPtr = svb_decode_vector(out, keyPtr, dataPtr, simd_count);
+  out += simd_count;
+  keyPtr += simd_count / 4;
+  count -= simd_count;
+#else
+  (void)simd_count;
+#endif
+
+  return (size_t)(svb_decode_scalar(out, keyPtr, dataPtr, count) - in);
+}
+
+size_t streamvbyte_decode(const uint8_t *in, uint32_t *out, uint32_t count) {
+  return svb_decode(in, out, count, count);
+}
+
+size_t streamvbyte_decode_unpadded(const uint8_t *in, uint32_t *out, uint32_t count) {
+  // Each value uses at least one data byte. Leave at least 16 values for
+  // scalar decoding so every preceding 16-byte SIMD load stays in the stream.
+  // Round down to whole SIMD batches in svb_decode, preserving key boundaries.
+  const uint32_t simd_count = count > STREAMVBYTE_PADDING
+                                 ? count - STREAMVBYTE_PADDING : 0;
+  return svb_decode(in, out, count, simd_count);
+}
+
+bool streamvbyte_validate_stream(const uint8_t *in, size_t inCount,
+                                 uint32_t outCount) {
+  if (inCount == 0 || outCount == 0)
+    return inCount == outCount;
+
+  // 2-bits per key (rounded up)
+  // Note that we don't add to outCount in case it overflows
+  uint32_t keyLen = outCount / 4;
+  if (outCount & 3)
+    keyLen++;
+
+  // Check that there's enough space for the keys
+  if (keyLen > inCount)
+    return false;
+
+  // Accumulate the key sizes in a wider type to avoid overflow
+  const uint8_t *keyPtr = in;
+  uint64_t encodedSize = 0;
+
+#if defined(STREAMVBYTE_IS_ARM64)
+  encodedSize = svb_validate_vector(&keyPtr, &outCount);
+#endif
+
+  // Give the compiler a hint that it can avoid branches in the inner loop
+  for (uint32_t c = 0; c < outCount / 4; c++) {
+    uint32_t key = *keyPtr++;
+    for (uint8_t shift = 0; shift < 8; shift += 2) {
+      const uint8_t code = (key >> shift) & 0x3;
+      encodedSize += code + 1;
+    }
+  }
+  outCount &= 3;
+
+  // Process the remainder (fewer than 4 values, so at most one key). Read the
+  // key only if there is a remainder: otherwise in[keyLen] may be past the end.
+  if (outCount) {
+    const uint32_t key = *keyPtr;
+    for (uint8_t shift = 0; shift < 2 * outCount; shift += 2) {
+      const uint8_t code = (key >> shift) & 0x3;
+      encodedSize += code + 1;
+    }
+  }
+
+  return encodedSize == inCount - keyLen;
+}

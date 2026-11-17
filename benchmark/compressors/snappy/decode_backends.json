@@ -1,0 +1,13 @@
+{
+  "snappy": {
+    "cpu": {
+      "packages": [
+        "python-snappy"
+      ],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  }
+}

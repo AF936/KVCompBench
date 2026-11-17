@@ -1,0 +1,11 @@
+{
+  "zipnn": {
+    "execution_path": "CPU-CPU",
+    "frame_format": "plugin:zipnn",
+    "thread_safe": false,
+    "batch_kind": "cpu-single",
+    "packages": [
+      "zipnn"
+    ]
+  }
+}

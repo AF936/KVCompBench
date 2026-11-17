@@ -1,0 +1,4 @@
+# Explicit optional aggregate; not required for the core CPU profile.
+-r ../requirements/core.txt
+-r ../requirements/optional-cpu.txt
+-r ../requirements/optional-gpu-cu13.txt

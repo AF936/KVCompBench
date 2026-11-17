@@ -1,0 +1,189 @@
+{
+  "schema_version": 2,
+  "codecs": [
+    {
+      "name": "identity",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zlib",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zlib:1",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zlib:6",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "gzip",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "bz2",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "lzma",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "lzma:1",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "lzma:6",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "lz4",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zstd:1",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zstd:3",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "zstd:9",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "snappy",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "fpzip32",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "fpzip64",
+      "adapter": "api",
+      "provenance": "Direct upstream Python library API",
+      "paper_ids": [],
+      "source": "benchmark/compression_framework/adapters/catalog.py"
+    },
+    {
+      "name": "nvcomp-lz4",
+      "adapter": "gpu-api",
+      "algorithm": "LZ4",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-snappy",
+      "adapter": "gpu-api",
+      "algorithm": "Snappy",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-gdeflate",
+      "adapter": "gpu-api",
+      "algorithm": "GDeflate",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-deflate",
+      "adapter": "gpu-api",
+      "algorithm": "Deflate",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-bitcomp",
+      "adapter": "gpu-api",
+      "algorithm": "Bitcomp",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-ans",
+      "adapter": "gpu-api",
+      "algorithm": "ANS",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-zstd",
+      "adapter": "gpu-api",
+      "algorithm": "Zstd",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-cascaded",
+      "adapter": "gpu-api",
+      "algorithm": "Cascaded",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    },
+    {
+      "name": "nvcomp-gzip",
+      "adapter": "gpu-api",
+      "algorithm": "Gzip",
+      "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
+      "paper_ids": [],
+      "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"
+    }
+  ]
+}

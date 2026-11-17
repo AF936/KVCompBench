@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "fse",
+      "kind": "python",
+      "version": "upstream-9f30e0918f87bd835fa040d922a208d7b219e50b-adapter1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu",
+      "compress_kwargs": {
+        "algorithm": "fse"
+      },
+      "decompress_kwargs": {
+        "algorithm": "fse"
+      }
+    },
+    {
+      "name": "huff0",
+      "kind": "python",
+      "version": "upstream-9f30e0918f87bd835fa040d922a208d7b219e50b-adapter1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu",
+      "compress_kwargs": {
+        "algorithm": "huff0"
+      },
+      "decompress_kwargs": {
+        "algorithm": "huff0"
+      }
+    }
+  ]
+}
