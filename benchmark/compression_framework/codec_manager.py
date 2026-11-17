@@ -570,7 +570,7 @@ def install(names, profile='cpu', plan=False, base=True):
         os.environ.update(TMPDIR=str(scratch), TEMP=str(scratch), TMP=str(scratch))
         tempfile.tempdir = str(scratch)
         if not python.is_file():
-            subprocess.run([sys.executable, '-m', 'venv', '--copies', str(prefix)],
+            subprocess.run([sys.executable, '-m', 'venv', str(prefix)],
                            check=True, timeout=300, stdin=subprocess.DEVNULL)
         environment = dict(os.environ, TMPDIR=str(scratch), TEMP=str(scratch), TMP=str(scratch),
                            PIP_CACHE_DIR=str(prefix / 'pip-cache'), PYTHONDONTWRITEBYTECODE='1', MAX_JOBS='1')
