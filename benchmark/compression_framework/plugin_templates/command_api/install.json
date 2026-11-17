@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "package": "command_api",
+  "revision": "template-v1",
+  "requirements": [],
+  "imports": [
+    "zlib"
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "package": "zipnn",
+  "revision": "0.5.4+sentinel1",
+  "requirements": [
+    "safetensors==0.7.0"
+  ],
+  "imports": [
+    "zipnn"
+  ],
+  "platforms": [
+    "linux-x86_64"
+  ],
+  "installed_distributions": [
+    "zipnn==0.5.4+sentinel1"
+  ],
+  "sources": {
+    "archives": {
+      "zipnn": {
+        "url": "https://files.pythonhosted.org/packages/97/3c/08fd51416b56a40e3da4cb968b2b1ad424a7123db5c82397076f4d199390/zipnn-0.5.4.tar.gz",
+        "sha256": "abf45dbf41838f83aa2601dfb59c856b557b1df9c07cc243d93098ed889ce650"
+      }
+    },
+    "files": {
+      "MANIFEST.in": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/MANIFEST.in",
+        "sha256": "0349900510a348f01d347241a3758e430f378c0974713ffc73d1f009c334c546"
+      },
+      "README.md": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/README.md",
+        "sha256": "37cb2276c70fb6e85c66292f5a540018396944e0e99e9f893be59bcfd40b9308"
+      },
+      "csrc/data_manipulation_dtype16.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/data_manipulation_dtype16.c",
+        "sha256": "30ca9b0aee04c0dc378ce1ea21b431182c4c2c3f75a0ca072f146173c89f4678"
+      },
+      "csrc/data_manipulation_dtype16.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/data_manipulation_dtype16.h",
+        "sha256": "2a30a46340d9db369ca6aac8bbbe9f7e38ee9f1cb7656db7ae2926e15c410a08"
+      },
+      "csrc/data_manipulation_dtype32.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/data_manipulation_dtype32.c",
+        "sha256": "cc38b4c1548e2229d67eccfba6a459dbdd78a4c1f1c2a5a029328c00ca98a097"
+      },
+      "csrc/data_manipulation_dtype32.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/data_manipulation_dtype32.h",
+        "sha256": "9ea5ffdf1e846d8dc219eccf08ad84a8278ce7cfebf9b939c15ba193a2010b1f"
+      },
+      "csrc/zipnn_core.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/zipnn_core.c",
+        "sha256": "cfe2d881ca6efae4dc3bca0d189f4713e7fc5e1be7d3ad1e6fd9a266d7299594"
+      },
+      "csrc/zipnn_core_functions.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/zipnn_core_functions.h",
+        "sha256": "af430fdfe60b1456c2fcc64acc345523f0051296374b7ce9140ab9f5b21189e9"
+      },
+      "csrc/zipnn_core_module.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/csrc/zipnn_core_module.c",
+        "sha256": "0a05d18eaa8a81ff354f0bdff30fade3128e7cc83cc26ec2d3be92ac2ac14fd9",
+        "patches": [
+          {
+            "old": "\"Combine four buffers into a single bytearray using dtype16\"},\n};",
+            "new": "\"Combine four buffers into a single bytearray using dtype16\"},\n    {NULL, NULL, 0, NULL}\n};"
+          }
+        ],
+        "installed_sha256": "a295a4b985282aa89de07955285164c7dc5a50137ac24508ecf10f0567eaf5f0"
+      },
+      "include/FiniteStateEntropy/lib/Archives/hufx6.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/Archives/hufx6.h",
+        "sha256": "d54735a8e901f434b834ca5173fd2737da3aad884587962dea8f53858e2e5c8a"
+      },
+      "include/FiniteStateEntropy/lib/Archives/hufx6_decompress.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/Archives/hufx6_decompress.c",
+        "sha256": "36e062e4a5ff44aab1d295a7a39aa73154543b823f6fed0afc5ba8468ef70a68"
+      },
+      "include/FiniteStateEntropy/lib/README.md": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/README.md",
+        "sha256": "34f8c3dfebdfdffc45955679e2c06769f75c07e8b38f8f7696307752c5e7c2c4"
+      },
+      "include/FiniteStateEntropy/lib/bitstream.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/bitstream.h",
+        "sha256": "10920d6fa1285886bba72e321f0d2d6b91a6f873a007025e137b6467160850af"
+      },
+      "include/FiniteStateEntropy/lib/compiler.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/compiler.h",
+        "sha256": "561c025528b07ea326bd5263f37c9b20b20fd46090dd229cc317dd7ec8e12ee1"
+      },
+      "include/FiniteStateEntropy/lib/debug.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/debug.c",
+        "sha256": "3a585aec8951b83a572590f75506f249e9c7ed5063928719b11d097bb09462c2"
+      },
+      "include/FiniteStateEntropy/lib/debug.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/debug.h",
+        "sha256": "edb9d6ae7b0b544e17be942f62515884c60c29bf9dcd0f6d635ab70212d519d1"
+      },
+      "include/FiniteStateEntropy/lib/entropy_common.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/entropy_common.c",
+        "sha256": "6e99c67fa85d9f4d992b0fa12d0c0f6cd03e76efafe310792f65e19bcfbf0681"
+      },
+      "include/FiniteStateEntropy/lib/error_private.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/error_private.h",
+        "sha256": "e02849631bb58873c1a02ec5ff09cfac9132ed1fb439291fad75e728eec1c0a7"
+      },
+      "include/FiniteStateEntropy/lib/error_public.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/error_public.h",
+        "sha256": "92a58fcbcf6efb32322eb6ed2f2d3b14d5a1334d7b788d84d336c2e188832c95"
+      },
+      "include/FiniteStateEntropy/lib/fse.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/fse.h",
+        "sha256": "eb01351af5e4b84dbbe43c7f656bae928011dd7ce2f9c1c67b694d23d29e74a5"
+      },
+      "include/FiniteStateEntropy/lib/fseU16.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/fseU16.c",
+        "sha256": "ce61f9630c42a239a746261183267674b253200a6489f488712f001ed04f4ebb"
+      },
+      "include/FiniteStateEntropy/lib/fseU16.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/fseU16.h",
+        "sha256": "b27b2c10d29930f60a4cbf7fc23563b85af90b14cf113c39521c03f6c2cbb731"
+      },
+      "include/FiniteStateEntropy/lib/fse_compress.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/fse_compress.c",
+        "sha256": "55d5afad22479eb914a82c2b3fc083bb294ba852be4eaa4bb7eb2d85608c1d04"
+      },
+      "include/FiniteStateEntropy/lib/fse_decompress.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/fse_decompress.c",
+        "sha256": "f4e554538d61e67647212ad9ad329b8235e75c2868e6e0f6917b9bfb54184979"
+      },
+      "include/FiniteStateEntropy/lib/hist.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/hist.c",
+        "sha256": "689c63d7c103293e6cf640a08c7e7b9ea877b5954e26ffe329f6430e4911ae69"
+      },
+      "include/FiniteStateEntropy/lib/hist.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/hist.h",
+        "sha256": "fac32e240134107e88e12a39b7627322c12eaf0cd841b3eb22f4e4e06a271a3e"
+      },
+      "include/FiniteStateEntropy/lib/huf.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/huf.h",
+        "sha256": "0477e8f4a997df95cada7690c415b6d6b0b1a5465dc856f4f9a87d9a026bbd75"
+      },
+      "include/FiniteStateEntropy/lib/huf_compress.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/huf_compress.c",
+        "sha256": "bde5c21fd99bcb8a63a911f41012c78888ab545ead82011e322fbbfce6781d6a"
+      },
+      "include/FiniteStateEntropy/lib/huf_decompress.c": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/huf_decompress.c",
+        "sha256": "d30f6e86bf80340a6f3c26c7353f98476b7104145737744e5ce383701fba9007"
+      },
+      "include/FiniteStateEntropy/lib/mem.h": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/include/FiniteStateEntropy/lib/mem.h",
+        "sha256": "7f66c2e88dd54c925a3f0442ea46e93e7a7f0e795495ce2f91ae4c544db70756"
+      },
+      "setup.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/setup.py",
+        "sha256": "058af5a47a536d27fad80a6357ac56ec1be2755b061ff70b762b7f67ff9f7e27",
+        "patches": [
+          {
+            "old": "version=\"0.5.4\"",
+            "new": "version=\"0.5.4+sentinel1\""
+          }
+        ],
+        "installed_sha256": "5497127f4e57f8523efeba485452fdbf2e40ae84f12e6d91b48ec3b9edd7ab60"
+      },
+      "zipnn/__init__.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/__init__.py",
+        "sha256": "40a02b691e6b8e822c5563036c096a82dff856a911f22769996df692fa36bafd"
+      },
+      "zipnn/util_header.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/util_header.py",
+        "sha256": "5cfef22309aebeb24a7dae02568d54f31c8653fd583dbbe28260f3689f541471"
+      },
+      "zipnn/util_patch.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/util_patch.py",
+        "sha256": "12a40b11705cacd2504df6e546d02c2e1533235f829e72e65c3ce1f1e54f152d"
+      },
+      "zipnn/util_safetensors.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/util_safetensors.py",
+        "sha256": "4efa43ed2036e1d72b508620a70d4fb55ba47fae14cbe43e5fa128d9e45b0267"
+      },
+      "zipnn/util_torch.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/util_torch.py",
+        "sha256": "5447d9b7728d1caf1214ef90782481b233f4f7d0586e62c54e96e2c38f2ed579"
+      },
+      "zipnn/zipnn.py": {
+        "archive": "zipnn",
+        "member": "zipnn-0.5.4/zipnn/zipnn.py",
+        "sha256": "c3367ec3719fcde2f575cbbd73f80d44dac9b4c2739c71d6ef0e198ba1f008f2"
+      }
+    }
+  },
+  "commands": [
+    [
+      "{python}",
+      "-m",
+      "pip",
+      "install",
+      "--no-deps",
+      "--no-build-isolation",
+      "--no-compile",
+      "{source}"
+    ]
+  ],
+  "tools": [
+    "gcc"
+  ]
+}

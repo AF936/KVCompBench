@@ -19,7 +19,7 @@ def settings(path):
     config=configparser.ConfigParser(interpolation=None)
     with path.open(encoding='utf-8') as handle:config.read_file(handle)
     allowed={
-        'environment':{'name','python','wsl_distribution','wsl_env_path'},
+        'environment':{'name','python','external_lock','wsl_distribution','wsl_env_path'},
         'compression':{'codec','block_bytes','input','output','metadata'},
         'decompression':{'input','output','verify_sha256'},
         'benchmark_datasets':None,
@@ -68,16 +68,7 @@ def main():
             sub.add_argument('--metadata')
     args = parser.parse_args()
     if args.command == 'install-plugin-deps':
-        from plugins import dependency_files
-        if sys.prefix == sys.base_prefix:
-            raise RuntimeError('Run through run.sh or a project virtual environment to install plugin dependencies')
-        scratch = Path(sys.prefix)/'tmp'
-        scratch.mkdir(parents=True,exist_ok=True)
-        environment = os.environ.copy()
-        environment.update(TMPDIR=str(scratch),TEMP=str(scratch),TMP=str(scratch),PIP_CACHE_DIR=str(Path(sys.prefix)/'pip-cache'))
-        for path in dependency_files(args.plugins):
-            subprocess.run([sys.executable,'-m','pip','install','--no-compile','--index-url',args.index_url,'-r',str(path)],check=True,env=environment)
-        return
+        raise SystemExit('Use python kvbench.py setup --codecs <names>; bulk unmanaged dependency installation is disabled')
     plugins = load_plugins(args.plugins)
     if args.command in ('list','check') and args.device != 'all':
         plugins = {name:p for name,p in plugins.items() if (getattr(p,'entry',{}).get('adapter') == 'gpu-api') == (args.device == 'gpu')}
@@ -98,6 +89,8 @@ def main():
                 if not plugin.supports(metadata):
                     print(f'{name}\tSKIPPED_DTYPE')
                     continue
+                from codec_manager import identity
+                identity(name, gpu=getattr(plugin,'entry',{}).get('adapter')=='gpu-api', directory=args.plugins)
                 if hasattr(plugin, 'prepare'):
                     plugin.prepare(metadata)
                 raw = bytes(range(128)) * 2

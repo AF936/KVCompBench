@@ -8,8 +8,9 @@ import sys
 
 @lru_cache(maxsize=None)
 def library(name):
-    path=Path(sys.prefix)/'native'/name/('codec.dll' if sys.platform=='win32' else 'libcodec.so')
-    if not path.is_file():raise ImportError(f'Build {name} in the selected environment: bash python3 kvbench.py setup --optional')
+    from codec_manager import artifact_path
+    path=artifact_path(name,'native/'+name+'/'+('codec.dll' if sys.platform=='win32' else 'libcodec.so'))
+    if not path.is_file():raise ImportError(f'Build {name} in the selected environment: python3 kvbench.py setup --codecs {name}')
     return ctypes.CDLL(str(path))
 
 

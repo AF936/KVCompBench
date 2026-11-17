@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "package": "gzip",
+  "revision": "stdlib",
+  "requirements": [],
+  "imports": [
+    "gzip"
+  ],
+  "gpu_requirements": [
+    "nvidia-nvcomp-cu13==6.0.0.12"
+  ],
+  "gpu_imports": [
+    "nvidia.nvcomp"
+  ]
+}

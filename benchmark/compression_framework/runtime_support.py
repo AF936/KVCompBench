@@ -4,6 +4,9 @@ from pathlib import Path
 from packaging.requirements import Requirement
 
 def unavailable(route,compressors):
+    from codec_manager import identity
+    report=identity(route.name,gpu=route.mode.endswith('-GPU'),enforce=False)
+    if report['errors']:return '; '.join(report['errors'])
     base=Path(compressors).resolve()
     for manifest in base.glob('*/codec.json'):
         declarations=json.loads(manifest.read_text(encoding='utf-8'))['codecs']

@@ -8,7 +8,8 @@ from adapters.paper_support import packet,unpacket
 
 @lru_cache(maxsize=1)
 def upstream():
-    path=Path(__file__).parent/'upstream/codec_gpu.py'
+    from codec_manager import source_file
+    path=source_file('splitzip','codec_gpu.py')
     spec=importlib.util.spec_from_file_location('kv_official_splitzip',path)
     module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
     return module

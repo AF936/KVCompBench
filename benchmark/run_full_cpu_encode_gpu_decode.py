@@ -69,6 +69,8 @@ def main():
         count=len(pages)
         input_hash=digest(path);sample=pages[0]
         for name,route in routes.items():
+            from codec_manager import identity
+            installation=identity(name,gpu=route.mode.endswith('-GPU'))
             runtime=route.runtime();cpu=runtime.cpu_decoder()
             modes=[route.mode]
             if route.mode.endswith('-GPU') and cpu is not None:modes.append(route.mode.split('-')[0]+'-CPU')
@@ -85,7 +87,7 @@ def main():
             for dist in filter(None,distributions):
                 try:packages[dist]=md.version(dist)
                 except md.PackageNotFoundError:packages[dist]='unavailable'
-            spec=dict(dataset=filename,input_sha256=input_hash,shape=pages.shape,dataset_metadata=pages.dataset_metadata,layout=layout,codec=name,source=source,packages=packages,frame_format=route.backend_id,options=route.options,framework=common,environment=environment,workers=workers,timing=TIMING_VERSION,validation=args.validate_only,count=count)
+            spec=dict(installation=installation,dataset=filename,input_sha256=input_hash,shape=pages.shape,dataset_metadata=pages.dataset_metadata,layout=layout,codec=name,source=source,packages=packages,frame_format=route.backend_id,options=route.options,framework=common,environment=environment,workers=workers,timing=TIMING_VERSION,validation=args.validate_only,count=count)
             encjob=fingerprint(spec);jobs={mode:fingerprint(dict(encoder=encjob,mode=mode,batch=batch_size if mode.endswith('-GPU') else 1)) for mode in modes}
             for mode,job in jobs.items():(out/('job_'+job+'.json')).write_text(json.dumps(dict(spec,mode=mode,encode_job=encjob),sort_keys=True))
             gpu=BatchDecoder(runtime) if route.mode.endswith('-GPU') else None;cpu_warmed=set();effective=workers if runtime.thread_safe and route.mode.startswith('CPU-') else 1

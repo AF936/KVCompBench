@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "package": "elf",
+  "revision": "64e0d6004be322d9d8eaf9931e371df202f1a0eb",
+  "requirements": [],
+  "imports": [],
+  "sources": {
+    "revision": "64e0d6004be322d9d8eaf9931e371df202f1a0eb",
+    "archives": {
+      "elf": {
+        "url": "https://codeload.github.com/Spatio-Temporal-Lab/elf/tar.gz/64e0d6004be322d9d8eaf9931e371df202f1a0eb",
+        "sha256": "02ce8ab0da921a637ebcef3874bf5220324b6f75063be9ff6a41130c049c80b5",
+        "revision": "64e0d6004be322d9d8eaf9931e371df202f1a0eb",
+        "repository": "Spatio-Temporal-Lab/elf"
+      }
+    },
+    "files": {
+      "java/gr/aueb/delorean/chimp/InputBitStream.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/gr/aueb/delorean/chimp/InputBitStream.java",
+        "sha256": "2a9e65807e2e135860883130353a9313a73b22b1a70facc267b23cf25f3e6a89"
+      },
+      "java/gr/aueb/delorean/chimp/OutputBitStream.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/gr/aueb/delorean/chimp/OutputBitStream.java",
+        "sha256": "ebcb7bceff8e372972068d910cc3489a08855299ae85211cdae23688bd107c63"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor/AbstractElfCompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor/AbstractElfCompressor.java",
+        "sha256": "71a4ab17fb7e75ebcf9c40230e0595da4e5a1303c602809bb0c2599b5424d2e4"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor/ElfCompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor/ElfCompressor.java",
+        "sha256": "236d2f88f45b59111e92bd079ae780a299047bbc7d8ce7936156c553f379a5ca"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor/ICompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor/ICompressor.java",
+        "sha256": "46f59079070806d8e1a46a8cfb2f714d1cad0703bb001ac1e23fb2a7b3a33387"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor32/AbstractElfCompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor32/AbstractElfCompressor32.java",
+        "sha256": "0437d5d80f0423c89db540bda1b4bd3c5cc458ed1a373f9f726145ee35b7ecdd"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor32/ElfCompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor32/ElfCompressor32.java",
+        "sha256": "bfd736cfa4071bae71fc4420d1ddc42ca43140c69633db3267a19b520c05d514"
+      },
+      "java/org/urbcomp/startdb/compress/elf/compressor32/ICompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/compressor32/ICompressor32.java",
+        "sha256": "a9895ae2a6bba8b925c17aa4b1f009aa642a3f518dd76f2f507ff12db208e558"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor/AbstractElfDecompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor/AbstractElfDecompressor.java",
+        "sha256": "165fca69234eaa37622b0abcdb40d5576162203c510b306ed9822c1de86467a6"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor/ElfDecompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor/ElfDecompressor.java",
+        "sha256": "a9404577308def095b8cf8643393a7281a0456efeb34ef8aa2c87e035b1528b2"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor/IDecompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor/IDecompressor.java",
+        "sha256": "2bfcf658d029865a19be31b35f5af6a4be28bd8173c81c630dc80f380c561ae3"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor32/AbstractElfDecompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor32/AbstractElfDecompressor32.java",
+        "sha256": "c80d3ffad5bdc1b91aff6ef0b60a3503897a897e37f997628b6cdd46badc1869"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor32/ElfDecompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor32/ElfDecompressor32.java",
+        "sha256": "a3a901d051eb965c50f8faec0ff5a0bad23dba532261c085ddc5b13ba3008b73"
+      },
+      "java/org/urbcomp/startdb/compress/elf/decompressor32/IDecompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/decompressor32/IDecompressor32.java",
+        "sha256": "7615b768021a3cfa7dc2604c867db00736af3b18e15914a623ff0b588b8e0c2e"
+      },
+      "java/org/urbcomp/startdb/compress/elf/utils/Elf32Utils.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/utils/Elf32Utils.java",
+        "sha256": "fd1554f8dd14063a4cc1113a8246f55fe91a258028c0015ec9e7df9cacd97e2e",
+        "patches": [
+          {
+            "old": "    // \u03b1log_2(10) for look-up\n",
+            "new": "    // \u4f2alog_2(10) for look-up\n"
+          },
+          {
+            "old": "        while (tempInt != temp) {\n",
+            "new": "        while (tempInt != temp) {\n            // Local safety patch: overflow cannot converge to an integer.\n            // The byte bridge catches this and preserves the raw frame.\n            if (!Float.isFinite(temp) || temp >= 0x1p31f || i >= 64) {\n                throw new IllegalArgumentException(\"ELF32 decimal scaling overflow\");\n            }\n"
+          }
+        ],
+        "installed_sha256": "67c9095cc8e472517b8708e342f67fbdbbe6e2b2860021c6ca237d0e4a5c11a4"
+      },
+      "java/org/urbcomp/startdb/compress/elf/utils/Elf64Utils.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/utils/Elf64Utils.java",
+        "sha256": "3709df654de327efce4da79e0e26e9e5ce140f91e8bb63256dcfb3654f923d97"
+      },
+      "java/org/urbcomp/startdb/compress/elf/xorcompressor/ElfXORCompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/xorcompressor/ElfXORCompressor.java",
+        "sha256": "9a192200689a278c050582ff4e967b4fb420e5edff56bab0a4288bafce5f0613"
+      },
+      "java/org/urbcomp/startdb/compress/elf/xorcompressor/ElfXORCompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/xorcompressor/ElfXORCompressor32.java",
+        "sha256": "1d1b55d938d3601a00d402f14d260bd71ce52a3c3b3f3ad17c4ffd2c7bcfc6a4"
+      },
+      "java/org/urbcomp/startdb/compress/elf/xordecompressor/ElfXORDecompressor.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/xordecompressor/ElfXORDecompressor.java",
+        "sha256": "c507e30e27e61464b8b4ccbffc27cfc22610344d6ff94217ea1419540201976d"
+      },
+      "java/org/urbcomp/startdb/compress/elf/xordecompressor/ElfXORDecompressor32.java": {
+        "archive": "elf",
+        "member": "elf-64e0d6004be322d9d8eaf9931e371df202f1a0eb/src/main/java/org/urbcomp/startdb/compress/elf/xordecompressor/ElfXORDecompressor32.java",
+        "sha256": "8db18bf0a69aa1d54c79b35c806f6b53289ba5d9f8e528d24ba1504269d33eef"
+      }
+    }
+  },
+  "platforms": [
+    "linux-x86_64"
+  ],
+  "directories": [
+    "native/elf/classes"
+  ],
+  "resources": [
+    {
+      "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz",
+      "sha256": "8b9b611d917e3dfd8419d3566b5949226f69b052fed7e109c1368add1dfe8711",
+      "version": "jdk-17.0.21+9",
+      "target": "toolchains/jdk17",
+      "extract": true
+    },
+    {
+      "name": "dsiutils-2.7.0.jar",
+      "url": "https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.7.0/dsiutils-2.7.0.jar",
+      "sha256": "613509560c3e29fea026000a02b56e6bad19b7ef70dceacb0f1c964790e5927f",
+      "target": "native/java-deps/dsiutils-2.7.0.jar"
+    },
+    {
+      "name": "fastutil-8.4.4.jar",
+      "url": "https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.4.4/fastutil-8.4.4.jar",
+      "sha256": "3d7981b838c8fe8d8f1ef93c9ee4ebf6bd1091cc1c5847fe41db22d1648081e3",
+      "target": "native/java-deps/fastutil-8.4.4.jar"
+    }
+  ],
+  "tools": [
+    "{jdk}/bin/javac"
+  ],
+  "outputs": [
+    "native/elf/classes/JavaCodecBridge.class",
+    "native/java-deps/dsiutils-2.7.0.jar",
+    "native/java-deps/fastutil-8.4.4.jar",
+    "toolchains/jdk17/bin/java",
+    "toolchains/jdk17/bin/javac"
+  ],
+  "commands": [
+    [
+      "{jdk}/bin/javac",
+      "-encoding",
+      "UTF-8",
+      "-cp",
+      "{prefix}/native/java-deps/dsiutils-2.7.0.jar:{prefix}/native/java-deps/fastutil-8.4.4.jar",
+      "-d",
+      "{prefix}/native/elf/classes",
+      "{plugin}/JavaCodecBridge.java",
+      "@glob:{source}/java/**/*.java"
+    ]
+  ],
+  "output_globs": [
+    "native/elf/classes/**/*.class"
+  ],
+  "build_inputs": {
+    "JavaCodecBridge.java": "8396b0a33ca0d21bd5f32dda088ecc9a52f49f6c0f4f4025bb9ebe194235dbf5"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "package": "openzl",
+  "revision": "python-pins-v1",
+  "requirements": [
+    "openzl==0.3.0",
+    "xxhash==3.6.0"
+  ],
+  "imports": [
+    "openzl.ext",
+    "xxhash"
+  ],
+  "gpu_requirements": [
+    "zstandard==0.25.0",
+    "nvidia-nvcomp-cu13==6.0.0.12"
+  ],
+  "gpu_imports": [
+    "zstandard",
+    "nvidia.nvcomp"
+  ]
+}

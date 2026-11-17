@@ -26,10 +26,12 @@ def pack(source, target, codec='zlib', block_bytes=65536, metadata=None, plugin_
     if codec not in available:
         raise ValueError(f'Unknown codec {codec!r}; add a codec.json package or run list')
     plugin = available[codec]
+    from codec_manager import identity
+    installation = identity(codec, gpu=getattr(plugin,'entry',{}).get('adapter')=='gpu-api', directory=plugin_dir)
     plugin.prepare(context) if hasattr(plugin, "prepare") else None
     if not plugin.supports(context):
         raise ValueError(f'{codec} does not support the supplied metadata')
-    manifest = dict(format='kv-blocks-v1', codec=codec, codec_version=plugin.VERSION,
+    manifest = dict(installation=installation,format='kv-blocks-v1', codec=codec, codec_version=plugin.VERSION,
                     block_bytes=block_bytes, metadata=context, blocks=[], raw_bytes=0)
     # Exclusive creation protects both existing results and the source file.
     with target.open('xb') as output:
@@ -64,6 +66,8 @@ class Reader:
             if m['format'] != 'kv-blocks-v1':
                 raise ValueError('Unsupported container version')
             self.plugin = load_plugins(plugin_dir)[m['codec']]
+            from codec_manager import identity
+            self.installation = identity(m['codec'], gpu=getattr(self.plugin,'entry',{}).get('adapter')=='gpu-api', directory=plugin_dir)
             self.plugin.prepare(m['metadata']) if hasattr(self.plugin, 'prepare') else None
             if self.plugin.VERSION != m['codec_version']:
                 raise ValueError('Codec version mismatch')

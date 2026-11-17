@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "package": "snappy",
+  "revision": "python-pins-v1",
+  "requirements": [
+    "python-snappy==0.7.3"
+  ],
+  "imports": [
+    "snappy"
+  ],
+  "gpu_requirements": [
+    "nvidia-nvcomp-cu13==6.0.0.12"
+  ],
+  "gpu_imports": [
+    "nvidia.nvcomp"
+  ]
+}

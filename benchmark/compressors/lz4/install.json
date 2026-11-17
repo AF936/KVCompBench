@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "package": "lz4",
+  "revision": "python-pins-v1",
+  "requirements": [
+    "lz4==4.4.5"
+  ],
+  "imports": [
+    "lz4.frame"
+  ],
+  "gpu_requirements": [
+    "nvidia-nvcomp-cu13==6.0.0.12"
+  ],
+  "gpu_imports": [
+    "nvidia.nvcomp"
+  ]
+}

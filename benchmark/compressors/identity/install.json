@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "package": "identity",
+  "revision": "stdlib",
+  "requirements": [],
+  "imports": [
+    "builtins"
+  ]
+}
