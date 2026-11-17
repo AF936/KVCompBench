@@ -1,13 +1,11 @@
 {
   "snappy": {
     "cpu": {
+      "type": "shared",
+      "id": "nvcomp-snappy-raw",
       "packages": [
         "python-snappy"
-      ],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      ]
     }
   }
 }

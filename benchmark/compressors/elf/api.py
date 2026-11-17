@@ -11,7 +11,7 @@ def call(data,metadata,mode):
     native=Path(sys.prefix)/'native'/name
     bundled=Path(sys.prefix)/'toolchains/jdk17/bin/java'
     java=str(bundled) if bundled.is_file() else shutil.which('java')
-    if not java or not (native/'classes/JavaCodecBridge.class').is_file():raise ImportError('Build Java codec dependencies with python3 kvbench.py setup --optional')
+    if not java or not (native/'classes/JavaCodecBridge.class').is_file():raise ImportError('Build Java codec dependencies with setup_paper_codecs.sh')
     width={'fp32':4,'fp64':8}[metadata['dtype']]
     jars=Path(sys.prefix)/'native/java-deps'
     classpath=os.pathsep.join([str(native/'classes'),str(jars/'dsiutils-2.7.0.jar'),str(jars/'fastutil-8.4.4.jar')])

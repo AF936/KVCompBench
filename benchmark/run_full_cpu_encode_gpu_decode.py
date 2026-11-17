@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse,concurrent.futures,configparser,csv,hashlib,importlib.metadata as md,json,os,sys,time
 sys.path[:0]=[str(Path(__file__).resolve().parent),str(Path(__file__).resolve().parent/'compression_framework')]
-from benchmark_routes import select_routes, discover_routes
+from benchmark_routes import discover_routes
 from codec_timing import Encoder,TIMING_VERSION
 from batch_decode import BatchDecoder
 from kv_pages import Pages,dataset_configs,validation_subset
@@ -46,7 +46,11 @@ def main():
     config=args.settings or root/'benchmark/settings.txt';c=configparser.ConfigParser(interpolation=None);c.read(config)
     workers=c.getint('benchmark','cpu_encode_threads',fallback=1);batch_size=c.getint('benchmark','decode_batch_blocks',fallback=256)
     if not 1<=workers<=256 or not 1<=batch_size<=4096:raise ValueError('Invalid workers/batch size')
-    routes=select_routes(root/'benchmark/compressors',codec_set=c.get('benchmark','codec_set',fallback='core'),execution_device='cpu' if args.cpu_only else c.get('benchmark','execution_device',fallback='cpu'),codecs=args.codecs if args.codecs is not None else c.get('benchmark','codecs',fallback=None))
+    routes=discover_routes(root/'benchmark/compressors',codec_set=c.get('benchmark','codec_set',fallback='all'),execution_device='cpu' if args.cpu_only else c.get('benchmark','execution_device',fallback='declared'))
+    if args.codecs:
+        requested=args.codecs.split(',');missing=set(requested)-routes.keys()
+        if missing:raise ValueError('Unknown codecs: '+str(missing))
+        routes={name:routes[name] for name in requested}
     if args.cpu_only:routes={name:r for name,r in routes.items() if r.mode=='CPU-CPU'}
     if not routes:raise ValueError('No eligible codecs')
     omitted={}
@@ -55,7 +59,7 @@ def main():
         for name,route in list(routes.items()):
             reason=unavailable(route,root/'benchmark/compressors')
             if reason:
-                if args.codecs or c.get('benchmark','codecs',fallback='').strip():raise RuntimeError(name+': '+reason)
+                if args.codecs:raise RuntimeError(name+': '+reason)
                 omitted[name]=reason;del routes[name]
     import torch
     using_gpu=any(r.mode.endswith('-GPU') for r in routes.values())

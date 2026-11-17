@@ -10,8 +10,6 @@ qwen_bf16.pt = 524288
 cpu_encode_threads = 1
 decode_batch_blocks = 256
 codec_set = core
-# Explicit codec names override codec_set. Blank uses the group.
-codecs = identity, gzip, zlib, bz2, lzma
 execution_device = cpu
 skip_unavailable_codecs = false
 

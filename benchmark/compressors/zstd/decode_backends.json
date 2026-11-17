@@ -1,35 +1,29 @@
 {
   "zstd:1": {
     "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
       "packages": [
         "zstandard"
-      ],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      ]
     }
   },
   "zstd:3": {
     "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
       "packages": [
         "zstandard"
-      ],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      ]
     }
   },
   "zstd:9": {
     "cpu": {
+      "type": "shared",
+      "id": "nvcomp-zstd-raw",
       "packages": [
         "zstandard"
-      ],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      ]
     }
   }
 }

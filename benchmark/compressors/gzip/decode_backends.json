@@ -1,11 +1,9 @@
 {
   "gzip": {
     "cpu": {
-      "packages": [],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      "type": "shared",
+      "id": "nvcomp-gzip-raw",
+      "packages": []
     }
   }
 }

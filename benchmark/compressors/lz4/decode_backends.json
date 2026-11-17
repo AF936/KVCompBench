@@ -1,13 +1,11 @@
 {
   "lz4": {
     "cpu": {
+      "type": "shared",
+      "id": "nvcomp-lz4-block-raw",
       "packages": [
         "lz4"
-      ],
-      "type": "module",
-      "file": "compatible_cpu_decode.py",
-      "function": "decode",
-      "unpack_frame": true
+      ]
     }
   }
 }

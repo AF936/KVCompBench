@@ -9,7 +9,7 @@ import sys
 @lru_cache(maxsize=None)
 def library(name):
     path=Path(sys.prefix)/'native'/name/('codec.dll' if sys.platform=='win32' else 'libcodec.so')
-    if not path.is_file():raise ImportError(f'Build {name} in the selected environment: bash python3 kvbench.py setup --optional')
+    if not path.is_file():raise ImportError(f'Build {name} in the selected environment: bash setup_paper_codecs.sh')
     return ctypes.CDLL(str(path))
 
 

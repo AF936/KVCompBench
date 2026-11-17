@@ -17,5 +17,3 @@ __pycache__/
 !/benchmark/input/.gitkeep
 /benchmark/output/*
 !/benchmark/output/.gitkeep
-
-/benchmark/settings.*.local.txt
