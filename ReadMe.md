@@ -89,3 +89,5 @@ python3 benchmark/html_report.py benchmark/output/core_full
 ## 已发布结果
 
 [2026-11-17 经典 BF16 CPU/GPU 全量结果](results/2026-11-17-classic-bf16/README.md)：26 项路径配置，72,618 块全部通过逐字节验证。结果快照不包含输入数据或本机配置。
+
+[2026-11-17 GPU BF16 全量复测结果](results/2026-11-17-gpu-bf16/README.md)：20 个 GPU 配置覆盖两个完整数据集，含 40 条 GPU 路径与 20 条兼容 CPU 解码结果；111,720 个 GPU 页面全部通过逐字节校验。提供 Codec 与页面吞吐两种口径，测量提交为 `6ed1268`。

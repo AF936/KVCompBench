@@ -1,0 +1,282 @@
+[
+  {
+    "codec": "gzip",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-gzip-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "lz4",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-lz4-block-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-lz4",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:lz4",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-snappy",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:snappy",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-gdeflate",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:gdeflate",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-deflate",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:deflate",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-bitcomp",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:bitcomp",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-ans",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:ans",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-zstd",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:zstd",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-cascaded",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:cascaded:u8",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-gzip",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:gzip",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "openzl",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:openzl-serial-gpu-v1",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "snappy",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-snappy-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "splitzip",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "splitzip-packet-v1",
+    "batch_kind": "official-merged-batch"
+  },
+  {
+    "codec": "zlib",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:6",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:3",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:9",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "gzip",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-gzip-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "lz4",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-lz4-block-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-lz4",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:lz4",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-snappy",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:snappy",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-gdeflate",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:gdeflate",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-deflate",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:deflate",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-bitcomp",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:bitcomp",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-ans",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:ans",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-zstd",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:zstd",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-cascaded",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:cascaded:u8",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "nvcomp-gzip",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "nvcomp-native:gzip",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "openzl",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:openzl-serial-gpu-v1",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "snappy",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-snappy-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "splitzip",
+    "original": "GPU-GPU",
+    "cpu_available": false,
+    "frame_format": "splitzip-packet-v1",
+    "batch_kind": "official-merged-batch"
+  },
+  {
+    "codec": "zlib",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:6",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:3",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zstd:9",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-zstd-raw",
+    "batch_kind": "nvcomp-batch"
+  }
+]

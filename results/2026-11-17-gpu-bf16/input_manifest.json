@@ -1,0 +1,35 @@
+{
+  "commit": "6ed12686722f79efd76e837527fd4b38141aff9f",
+  "inputs": {
+    "deepseek_bf16.pt": {
+      "sha256": "cf17674a3e32a9539c26fa483b2728590c9a4a51f4bbb46729d38b12509b43ca",
+      "file_bytes": 664670231
+    },
+    "qwen_bf16.pt": {
+      "sha256": "30f0f1eb679e70f7874d6c9114cbfdddc1dd740ea6fc2c41efe9c7ae5a6a3635",
+      "file_bytes": 536872574
+    }
+  },
+  "codecs": [
+    "gzip",
+    "lz4",
+    "nvcomp-lz4",
+    "nvcomp-snappy",
+    "nvcomp-gdeflate",
+    "nvcomp-deflate",
+    "nvcomp-bitcomp",
+    "nvcomp-ans",
+    "nvcomp-zstd",
+    "nvcomp-cascaded",
+    "nvcomp-gzip",
+    "openzl",
+    "snappy",
+    "splitzip",
+    "zlib",
+    "zlib:1",
+    "zlib:6",
+    "zstd:1",
+    "zstd:3",
+    "zstd:9"
+  ]
+}
