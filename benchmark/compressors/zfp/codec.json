@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "zfp-reversible",
+      "kind": "python",
+      "version": "upstream-1.0.1-adapter1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu",
+      "dtypes": [
+        "fp32",
+        "fp64"
+      ],
+      "distribution": "zfpy"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "zlib",
+      "kind": "builtin",
+      "codec": "zlib",
+      "gpu_backend": {
+        "type": "shared",
+        "backend": "nvcomp-deflate-raw",
+        "encoder_options": {"level": 6},
+        "frame_version": 1
+      }
+    },
+    {
+      "name": "zlib:1",
+      "kind": "builtin",
+      "codec": "zlib:1",
+      "gpu_backend": {
+        "type": "shared",
+        "backend": "nvcomp-deflate-raw",
+        "encoder_options": {"level": 1},
+        "frame_version": 1
+      }
+    },
+    {
+      "name": "zlib:6",
+      "kind": "builtin",
+      "codec": "zlib:6",
+      "gpu_backend": {
+        "type": "shared",
+        "backend": "nvcomp-deflate-raw",
+        "encoder_options": {"level": 6},
+        "frame_version": 1
+      }
+    }
+  ]
+}

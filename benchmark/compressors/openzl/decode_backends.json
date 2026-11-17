@@ -1,0 +1,13 @@
+{
+  "openzl": {
+    "cpu": {
+      "type": "module",
+      "file": "api.py",
+      "function": "decompress",
+      "unpack_frame": true,
+      "packages": [
+        "openzl"
+      ]
+    }
+  }
+}

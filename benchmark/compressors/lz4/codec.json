@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "lz4",
+      "kind": "builtin",
+      "codec": "lz4",
+      "gpu_backend": {
+        "type": "shared",
+        "backend": "nvcomp-lz4-block-raw",
+        "frame_version": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "fpzip32",
+      "kind": "builtin",
+      "codec": "fpzip32",
+      "dtypes": [
+        "fp32"
+      ]
+    }
+  ]
+}
