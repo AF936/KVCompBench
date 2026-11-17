@@ -1,6 +1,0 @@
-{
-  "zipnn": {
-    "zh": "CPU 编码实例含可变状态，编码调用有串行保护；增加工作线程不保证该 codec 同比例加速。",
-    "en": "CPU encoding is serialized to protect mutable native state."
-  }
-}
