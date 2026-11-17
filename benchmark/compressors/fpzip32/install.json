@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "package": "fpzip32",
+  "revision": "python-pins-v1",
+  "requirements": [
+    "fpzip==1.2.5"
+  ],
+  "imports": [
+    "fpzip"
+  ]
+}

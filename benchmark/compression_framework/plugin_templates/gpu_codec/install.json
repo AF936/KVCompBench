@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "package": "gpu_codec",
+  "revision": "template-v1",
+  "requirements": [],
+  "imports": [
+    "zlib"
+  ],
+  "gpu_imports": [
+    "torch"
+  ]
+}

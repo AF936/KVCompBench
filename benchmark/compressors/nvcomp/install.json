@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "package": "nvcomp",
+  "revision": "python-pins-v1",
+  "requirements": [
+    "nvidia-nvcomp-cu13==6.0.0.12"
+  ],
+  "imports": [
+    "nvidia.nvcomp"
+  ],
+  "gpu_only": true,
+  "platforms": [
+    "linux-x86_64"
+  ]
+}

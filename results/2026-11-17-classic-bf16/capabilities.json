@@ -1,0 +1,128 @@
+[
+  {
+    "codec": "bz2",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:bz2",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "gzip",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-gzip-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "identity",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:identity",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma:1",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma:1",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma:6",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma:6",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "zlib",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:6",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "bz2",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:bz2",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "gzip",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-gzip-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "identity",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:identity",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma:1",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma:1",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "lzma:6",
+    "original": "CPU-CPU",
+    "cpu_available": true,
+    "frame_format": "plugin:lzma:6",
+    "batch_kind": "cpu-single"
+  },
+  {
+    "codec": "zlib",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:1",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  },
+  {
+    "codec": "zlib:6",
+    "original": "CPU-GPU",
+    "cpu_available": true,
+    "frame_format": "KVG1:nvcomp-deflate-raw",
+    "batch_kind": "nvcomp-batch"
+  }
+]

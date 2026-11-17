@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "package": "chimp",
+  "revision": "320d397157c7e0696b3c64dc1711fc17a3add3da",
+  "requirements": [],
+  "imports": [],
+  "sources": {
+    "revision": "320d397157c7e0696b3c64dc1711fc17a3add3da",
+    "archives": {
+      "chimp": {
+        "url": "https://codeload.github.com/panagiotisl/chimp/tar.gz/320d397157c7e0696b3c64dc1711fc17a3add3da",
+        "sha256": "8f509dbdd142f4a155dea368667a232943bc762c96c8edb5fede893c20544f45",
+        "revision": "320d397157c7e0696b3c64dc1711fc17a3add3da",
+        "repository": "panagiotisl/chimp"
+      }
+    },
+    "files": {
+      "java/gr/aueb/delorean/chimp/Chimp.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/Chimp.java",
+        "sha256": "aaf0926c09ed459fc7b51f13d9af3b6faed91bc17b49f99b5c82eb403930bfc7"
+      },
+      "java/gr/aueb/delorean/chimp/Chimp32.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/Chimp32.java",
+        "sha256": "0262b7b24c65fe9b4654d1682b06248fbd2faa6726b58e3c44fb8bcf41a9ee7e"
+      },
+      "java/gr/aueb/delorean/chimp/ChimpDecompressor.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/ChimpDecompressor.java",
+        "sha256": "b0c2b121f41c98b69b20d033cd8d0c3b1c6d204fac557d93795aaf474a86924c"
+      },
+      "java/gr/aueb/delorean/chimp/ChimpDecompressor32.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/ChimpDecompressor32.java",
+        "sha256": "bc9fee1d5c25f2180eaac8c1449bcf81bfcdb955691730d0dbc93afd12e71c69"
+      },
+      "java/gr/aueb/delorean/chimp/InputBitStream.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/InputBitStream.java",
+        "sha256": "c0d33ca318b97b4a636da5cceeb3d3e5c60943e3a4408de52e63f1f4995951be"
+      },
+      "java/gr/aueb/delorean/chimp/OutputBitStream.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/OutputBitStream.java",
+        "sha256": "be03e8c9f3f5cc5060bdaaedfaff1fe17065460c675af0145d6e470d6fd26e3e"
+      },
+      "java/gr/aueb/delorean/chimp/Value.java": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/src/main/java/gr/aueb/delorean/chimp/Value.java",
+        "sha256": "3df03bb327675991dcf3d1588e56f574d37d660d813bc5ca4dfa09f68ab77181"
+      },
+      "LICENCE.md": {
+        "archive": "chimp",
+        "member": "chimp-320d397157c7e0696b3c64dc1711fc17a3add3da/LICENCE.md",
+        "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      }
+    }
+  },
+  "platforms": [
+    "linux-x86_64"
+  ],
+  "directories": [
+    "native/chimp/classes"
+  ],
+  "resources": [
+    {
+      "url": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz",
+      "sha256": "8b9b611d917e3dfd8419d3566b5949226f69b052fed7e109c1368add1dfe8711",
+      "version": "jdk-17.0.21+9",
+      "target": "toolchains/jdk17",
+      "extract": true
+    },
+    {
+      "name": "dsiutils-2.7.0.jar",
+      "url": "https://repo.maven.apache.org/maven2/it/unimi/dsi/dsiutils/2.7.0/dsiutils-2.7.0.jar",
+      "sha256": "613509560c3e29fea026000a02b56e6bad19b7ef70dceacb0f1c964790e5927f",
+      "target": "native/java-deps/dsiutils-2.7.0.jar"
+    },
+    {
+      "name": "fastutil-8.4.4.jar",
+      "url": "https://repo.maven.apache.org/maven2/it/unimi/dsi/fastutil/8.4.4/fastutil-8.4.4.jar",
+      "sha256": "3d7981b838c8fe8d8f1ef93c9ee4ebf6bd1091cc1c5847fe41db22d1648081e3",
+      "target": "native/java-deps/fastutil-8.4.4.jar"
+    }
+  ],
+  "tools": [
+    "{jdk}/bin/javac"
+  ],
+  "outputs": [
+    "native/chimp/classes/JavaCodecBridge.class",
+    "native/java-deps/dsiutils-2.7.0.jar",
+    "native/java-deps/fastutil-8.4.4.jar",
+    "toolchains/jdk17/bin/java",
+    "toolchains/jdk17/bin/javac"
+  ],
+  "commands": [
+    [
+      "{jdk}/bin/javac",
+      "-encoding",
+      "UTF-8",
+      "-cp",
+      "{prefix}/native/java-deps/dsiutils-2.7.0.jar:{prefix}/native/java-deps/fastutil-8.4.4.jar",
+      "-d",
+      "{prefix}/native/chimp/classes",
+      "{plugin}/JavaCodecBridge.java",
+      "@glob:{source}/java/**/*.java"
+    ]
+  ],
+  "output_globs": [
+    "native/chimp/classes/**/*.class"
+  ],
+  "build_inputs": {
+    "JavaCodecBridge.java": "8396b0a33ca0d21bd5f32dda088ecc9a52f49f6c0f4f4025bb9ebe194235dbf5"
+  }
+}

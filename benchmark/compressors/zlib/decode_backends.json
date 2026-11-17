@@ -1,0 +1,29 @@
+{
+  "zlib": {
+    "cpu": {
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  },
+  "zlib:1": {
+    "cpu": {
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  },
+  "zlib:6": {
+    "cpu": {
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  }
+}

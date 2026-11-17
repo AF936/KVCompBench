@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "fpzip64",
+      "kind": "builtin",
+      "codec": "fpzip64",
+      "dtypes": [
+        "fp64"
+      ]
+    }
+  ]
+}

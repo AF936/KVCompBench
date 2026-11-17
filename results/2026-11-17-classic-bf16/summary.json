@@ -1,0 +1,36 @@
+{
+  "completed_date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "configurations": 26,
+  "verified_blocks": 72618,
+  "paths": {
+    "CPU-CPU": 18,
+    "CPU-GPU": 8
+  },
+  "codecs": [
+    "bz2",
+    "gzip",
+    "identity",
+    "lzma",
+    "lzma:1",
+    "lzma:6",
+    "zlib",
+    "zlib:1",
+    "zlib:6"
+  ],
+  "shared_encoder_groups": 8,
+  "datasets": {
+    "deepseek_bf16": {
+      "blocks": 5074,
+      "raw_bytes": 664663040,
+      "page_tokens": 128,
+      "block_bytes": 131072
+    },
+    "qwen_bf16": {
+      "blocks": 512,
+      "raw_bytes": 536870912,
+      "page_tokens": 256,
+      "block_bytes": 1048576
+    }
+  }
+}

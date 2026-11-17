@@ -1,0 +1,35 @@
+{
+  "zstd:1": {
+    "cpu": {
+      "packages": [
+        "zstandard"
+      ],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  },
+  "zstd:3": {
+    "cpu": {
+      "packages": [
+        "zstandard"
+      ],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  },
+  "zstd:9": {
+    "cpu": {
+      "packages": [
+        "zstandard"
+      ],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
+    }
+  }
+}
