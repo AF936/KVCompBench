@@ -1,8 +1,0 @@
-zstandard==0.25.0
-lz4==4.4.5
-python-snappy>=0.7,<1
-fpzip==1.2.5
-openzl==0.3.0
-zfpy==1.0.1
-safetensors>=0.4,<1
-xxhash==3.6.0
