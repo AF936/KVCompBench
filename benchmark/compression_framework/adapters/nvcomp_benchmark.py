@@ -20,7 +20,7 @@ class Backend(CPUBackend):
     def codec(self,algorithm,raw):
         key=(algorithm,raw)
         if key not in self.codecs:
-            options=dict(algorithm=algorithm,cuda_stream=self.stream.cuda_stream)
+            options=dict(self.route.options.get('codec_options',{}),algorithm=algorithm,cuda_stream=self.stream.cuda_stream)
             if raw:options['bitstream_kind']=self.nvcomp.BitstreamKind.RAW
             self.codecs[key]=self.nvcomp.Codec(**options)
         return self.codecs[key]

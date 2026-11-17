@@ -173,6 +173,7 @@
       "name": "nvcomp-cascaded",
       "adapter": "gpu-api",
       "algorithm": "Cascaded",
+      "codec_options": {"data_type": "|u1"},
       "provenance": "NVIDIA nvCOMP API; optional CUDA installation required",
       "paper_ids": [],
       "source": "https://docs.nvidia.com/cuda/nvcomp/samples/nvcomp.html"

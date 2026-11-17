@@ -85,8 +85,9 @@
   },
   "nvcomp-cascaded": {
     "execution_path": "GPU-GPU",
-    "frame_format": "nvcomp-native:cascaded",
+    "frame_format": "nvcomp-native:cascaded:u8",
     "algorithm": "Cascaded",
+    "codec_options": {"data_type": "|u1"},
     "raw": false,
     "file": "benchmark_backend.py",
     "batch_kind": "nvcomp-batch",
