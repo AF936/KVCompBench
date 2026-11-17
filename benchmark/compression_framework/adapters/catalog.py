@@ -37,7 +37,7 @@ class Codec:
                 raise RuntimeError('Set CUDA_VISIBLE_DEVICES to the GPU assigned by the administrator before GPU use')
             from nvidia import nvcomp
             algorithm=self.entry['algorithm']
-            codec=nvcomp.Codec(algorithm=algorithm)
+            codec=nvcomp.Codec(algorithm=algorithm,**self.entry.get('codec_options',{}))
             # Native framed format includes the metadata required by the official decoder.
             def encode(raw):return bytes(codec.encode(nvcomp.as_array(raw)).cpu())
             def decode(packet,n):return bytes(codec.decode(nvcomp.as_array(packet)).cpu())
