@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "zipnn",
+      "kind": "python",
+      "version": "upstream-0.5.4-sentinel1-adapter1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu",
+      "dtypes": [
+        "bf16",
+        "fp16",
+        "fp32"
+      ],
+      "distribution": "zipnn"
+    }
+  ]
+}
