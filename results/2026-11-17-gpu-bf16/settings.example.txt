@@ -1,0 +1,27 @@
+[environment]
+name = linux-x86_64-managed-cuda13
+
+[benchmark_datasets]
+deepseek_bf16.pt = 131072
+qwen_bf16.pt = 524288
+
+[benchmark]
+cpu_encode_threads = 1
+decode_batch_blocks = 256
+codec_set = all
+codecs = gzip,lz4,nvcomp-lz4,nvcomp-snappy,nvcomp-gdeflate,nvcomp-deflate,nvcomp-bitcomp,nvcomp-ans,nvcomp-zstd,nvcomp-cascaded,nvcomp-gzip,openzl,snappy,splitzip,zlib,zlib:1,zlib:6,zstd:1,zstd:3,zstd:9
+execution_device = declared
+skip_unavailable_codecs = false
+
+[dataset:qwen_bf16.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+
+[dataset:deepseek_bf16.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+

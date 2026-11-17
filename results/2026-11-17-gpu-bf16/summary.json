@@ -1,0 +1,106 @@
+{
+  "rows": 60,
+  "gpu_rows": 40,
+  "compatible_cpu_rows": 20,
+  "gpu_verified_pages": 111720,
+  "all_verified_pages": 167580,
+  "code_commit": "6ed12686722f79efd76e837527fd4b38141aff9f",
+  "input_sha256": {
+    "deepseek_bf16.pt": {
+      "sha256": "cf17674a3e32a9539c26fa483b2728590c9a4a51f4bbb46729d38b12509b43ca",
+      "file_bytes": 664670231
+    },
+    "qwen_bf16.pt": {
+      "sha256": "30f0f1eb679e70f7874d6c9114cbfdddc1dd740ea6fc2c41efe9c7ae5a6a3635",
+      "file_bytes": 536872574
+    }
+  },
+  "environment": {
+    "code_commit": "6ed12686722f79efd76e837527fd4b38141aff9f",
+    "dependencies": {
+      "nvidia-nvcomp-cu13": "6.0.0.12",
+      "torch": "2.9.1+cu130",
+      "zstandard": "0.25.0",
+      "openzl": "0.3.0",
+      "xxhash": "3.6.0",
+      "lz4": "4.4.5",
+      "python-snappy": "0.7.3",
+      "triton": "3.5.1"
+    },
+    "datasets": {
+      "deepseek_bf16.pt": {
+        "shape": [
+          43,
+          15095,
+          512
+        ],
+        "layout": {
+          "axes": "layer,token,latent",
+          "block_bytes": 131072,
+          "kv_semantics": "shared",
+          "layout": "kv",
+          "page_tokens": "128"
+        },
+        "dataset_metadata": {
+          "conversion": "native FP8 NoPE dequantized with UE8M0 scales; BF16 RoPE copied exactly; result stored as BF16",
+          "format": "deepseek_v4_flash_shared_kv_bf16_merged",
+          "key_value_shared": true,
+          "prequant_bf16_exactly_recoverable": false,
+          "source_fp8_dtype": "torch.float8_e4m3fn"
+        },
+        "input_sha256": "cf17674a3e32a9539c26fa483b2728590c9a4a51f4bbb46729d38b12509b43ca",
+        "count": 5074
+      },
+      "qwen_bf16.pt": {
+        "shape": [
+          16,
+          2,
+          1,
+          4,
+          8192,
+          256
+        ],
+        "layout": {
+          "axes": "layer,kv,batch,head,token,dim",
+          "block_bytes": 524288,
+          "kv_semantics": "separate",
+          "layout": "kv",
+          "page_tokens": "256"
+        },
+        "dataset_metadata": {},
+        "input_sha256": "30f0f1eb679e70f7874d6c9114cbfdddc1dd740ea6fc2c41efe9c7ae5a6a3635",
+        "count": 512
+      }
+    },
+    "installation_manifests": {
+      "zstd:9": "7f064947b222603ef1f0e2b0f7e2cf6f2595eea5c694e1eb6d0a802b94f1e9e0",
+      "gzip": "2d4936c05fd40e814a4500d39f7cb3a93160274f2c88a8037a9edc4af416d6f9",
+      "zstd:1": "7f064947b222603ef1f0e2b0f7e2cf6f2595eea5c694e1eb6d0a802b94f1e9e0",
+      "openzl": "748cd0ce8ae832d4720f482601fdeee5f7bd7a51d00a06c2169091c7b46c9106",
+      "zlib:1": "533c96539898e5166d9800b2fa31e8bf149806a213da6528d78855ae0aa4aea7",
+      "zlib": "533c96539898e5166d9800b2fa31e8bf149806a213da6528d78855ae0aa4aea7",
+      "nvcomp-snappy": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "lz4": "3677ea04d0ce7a5c099425736337e60be5266f10f434e9d198e06ffb57449d17",
+      "snappy": "2721a17874186f38852e4bc251dd32e369a24ccf0cbf806d40472ac17e943283",
+      "zstd:3": "7f064947b222603ef1f0e2b0f7e2cf6f2595eea5c694e1eb6d0a802b94f1e9e0",
+      "nvcomp-ans": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "splitzip": "4bb9fba056cabed8265a4c1542c8067f77fb354011c761abfb33b9d10035260c",
+      "nvcomp-bitcomp": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "nvcomp-lz4": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "nvcomp-zstd": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "zlib:6": "533c96539898e5166d9800b2fa31e8bf149806a213da6528d78855ae0aa4aea7",
+      "nvcomp-deflate": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "nvcomp-gdeflate": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "nvcomp-gzip": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d",
+      "nvcomp-cascaded": "8a548448973fb0f24fbe855655695e1006fd1aaa84dbe4ae63af388ab1a90d7d"
+    },
+    "runtime": {
+      "cuda": "13.0",
+      "device": "NVIDIA GeForce RTX 5090",
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "torch": "2.9.1+cu130"
+    },
+    "python_version": "3.10.12",
+    "operating_system": "Linux-5.15.0-119-generic-x86_64-with-glibc2.35"
+  }
+}

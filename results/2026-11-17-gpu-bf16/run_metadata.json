@@ -1,0 +1,43 @@
+{
+  "measurement_commit": "6ed12686722f79efd76e837527fd4b38141aff9f",
+  "started_utc": "2026-11-17T14:32:22Z",
+  "finished_utc": "2026-11-17T15:12:26Z",
+  "started_asia_shanghai": "2026-11-17T22:32:22+08:00",
+  "finished_asia_shanghai": "2026-11-17T23:12:26+08:00",
+  "wall_seconds": 2404,
+  "exit_code": 0,
+  "hardware_before": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver_version": "595.84",
+    "pstate": "P8",
+    "temperature.gpu": "28",
+    "power.limit [W]": "575.00 W",
+    "clocks.current.sm [MHz]": "180 MHz",
+    "clocks.current.memory [MHz]": "405 MHz"
+  },
+  "hardware_after": {
+    "name": "NVIDIA GeForce RTX 5090",
+    "driver_version": "595.84",
+    "pstate": "P0",
+    "temperature.gpu": "30",
+    "power.limit [W]": "575.00 W",
+    "clocks.current.sm [MHz]": "2392 MHz",
+    "clocks.current.memory [MHz]": "14001 MHz"
+  },
+  "process_environment": {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PYTHONHASHSEED": "0"
+  },
+  "cpu_encode_threads": 1,
+  "gpu_decode_batch_max_pages": 256,
+  "full_dataset_passes": 1,
+  "gpu_configurations": 20,
+  "datasets": 2,
+  "gpu_rows": 40,
+  "compatible_cpu_rows": 20,
+  "gpu_verified_pages": 111720,
+  "all_verified_pages": 167580,
+  "publication_notes": "Portable settings omit the machine-specific Python path. GPU UUID and private resource logs are excluded; numerical results and reports are unchanged."
+}
