@@ -19,11 +19,11 @@ def settings(path):
     config=configparser.ConfigParser(interpolation=None)
     with path.open(encoding='utf-8') as handle:config.read_file(handle)
     allowed={
-        'environment':{'name','wsl_distribution','wsl_env_path'},
+        'environment':{'name','python','wsl_distribution','wsl_env_path'},
         'compression':{'codec','block_bytes','input','output','metadata'},
         'decompression':{'input','output','verify_sha256'},
         'benchmark_datasets':None,
-        'benchmark':{'cpu_encode_threads','decode_batch_blocks','skip_unavailable_codecs','codec_set','execution_device'},
+        'benchmark':{'cpu_encode_threads','decode_batch_blocks','skip_unavailable_codecs','codec_set','execution_device','codecs'},
         'benchmark_gpu_backends':None,
     }
     for section in config.sections():

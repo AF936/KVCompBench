@@ -34,10 +34,10 @@ my_codec/
 The framework discovers the package on the next invocation. No registry edits or framework changes are required:
 
 ```bash
-bash run.sh list
-bash run.sh check --codec my-zlib
-bash run.sh compress kv.raw kv.kvc --codec my-zlib
-bash run.sh decompress kv.kvc restored.raw
+python3 kvbench.py cli list
+python3 kvbench.py cli check --codec my-zlib
+python3 kvbench.py cli compress kv.raw kv.kvc --codec my-zlib
+python3 kvbench.py cli decompress kv.kvc restored.raw
 ```
 
 Alternatively set `codec = my-zlib` in the `[compression]` section of `benchmark/settings.txt`. The decompressor reads the codec name and version from the stored container. The package must remain installed for decoding.
@@ -120,7 +120,7 @@ The command template requires an actual `zstd` executable. Installing the `zstan
 Put Python requirements in the package's `requirements.txt`. Install them into the environment selected by settings:
 
 ```bash
-bash run.sh install-plugin-deps
+python3 kvbench.py cli install-plugin-deps
 ```
 
 The normal environment setup scripts also install requirements from enabled packages. Requirements are not installed automatically during discovery or decompression. Native executables and library/system dependencies must be provided separately through the package or a compatible installed API.

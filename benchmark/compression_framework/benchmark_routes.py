@@ -81,3 +81,15 @@ def discover_routes(directory, codec_set='all', execution_device='declared'):
         routes[name]=Route(name,plugin,folder,options,gpu.get(name) if options.get('use_gpu_frame') else None)
     return routes
 
+
+def select_routes(directory, codec_set="core", execution_device="cpu", codecs=None):
+    """An explicit name list overrides package tiers, never device/dtype support."""
+    if codecs is None or not codecs.strip():
+        return discover_routes(directory,codec_set=codec_set,execution_device=execution_device)
+    names=[name.strip() for name in codecs.split(",")]
+    if any(not name for name in names):raise ValueError("Empty codec name in codecs")
+    if len(names)!=len(set(names)):raise ValueError("Duplicate codec names in codecs")
+    routes=discover_routes(directory,codec_set="all",execution_device=execution_device)
+    missing=set(names)-routes.keys()
+    if missing:raise ValueError("Unknown or incompatible codecs: "+", ".join(sorted(missing)))
+    return {name:routes[name] for name in names}

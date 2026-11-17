@@ -1,23 +1,29 @@
 {
   "zlib": {
     "cpu": {
-      "type": "shared",
-      "id": "nvcomp-deflate-raw",
-      "packages": []
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
     }
   },
   "zlib:1": {
     "cpu": {
-      "type": "shared",
-      "id": "nvcomp-deflate-raw",
-      "packages": []
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
     }
   },
   "zlib:6": {
     "cpu": {
-      "type": "shared",
-      "id": "nvcomp-deflate-raw",
-      "packages": []
+      "packages": [],
+      "type": "module",
+      "file": "compatible_cpu_decode.py",
+      "function": "decode",
+      "unpack_frame": true
     }
   }
 }

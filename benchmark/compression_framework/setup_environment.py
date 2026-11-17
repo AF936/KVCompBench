@@ -127,7 +127,7 @@ def main():
     (env/'environment.json').write_text(json.dumps(dict(name=name,python=str(python),platform=platform.platform(),profile=profile,gpu_tested=False),indent=2),encoding='utf-8')
     activate_setting(name)
     print(f'Environment ready: {python}',flush=True)
-    print('Selected in benchmark/settings.txt. Run bash run.sh list to inspect codecs.')
+    print('Selected in benchmark/settings.txt. Run python3 kvbench.py cli list to inspect codecs.')
 
 
 if __name__ == '__main__':

@@ -6,17 +6,11 @@ through that ID and rejects a mismatched format before launching a backend.
 """
 from __future__ import annotations
 
-import gzip
 import os
 from dataclasses import dataclass
-from functools import lru_cache
 from struct import Struct
 from typing import Callable
-import zlib
 
-import lz4.block
-import snappy
-import zstandard
 
 MAGIC = b"KVG1"
 FRAME_VERSION = 1
@@ -27,39 +21,29 @@ HEADER = Struct("<4sBBHI")  # magic, frame version, backend ID bytes, reserved, 
 class Backend:
     identifier: str
     description: str
-    nvcomp_algorithm: str | None = None
     decoder: Callable[[bytes, int], bytes] | None = None
     cpu_encoder: Callable[[bytes, dict], bytes] | None = None
 
 
-def _zstd_encoder(raw: bytes, options: dict) -> bytes:
-    return zstandard.ZstdCompressor(level=int(options.get("level", 3))).compress(raw)
-
-
-def _raw_deflate_encoder(raw: bytes, options: dict) -> bytes:
-    stream = zlib.compressobj(int(options.get("level", 6)), zlib.DEFLATED, -15)
-    return stream.compress(raw) + stream.flush()
-
-
-def _identity_gpu_decoder(payload: bytes, raw_bytes: int) -> bytes:
-    """GPU-resident copy path used as the lossless no-compression baseline."""
-    if len(payload) != raw_bytes:
-        raise ValueError("Identity payload length mismatch")
-    import torch
-    return torch.frombuffer(bytearray(payload), dtype=torch.uint8).to("cuda:0").cpu().numpy().tobytes()
-
-
-BACKENDS = {
-    "identity-gpu-copy": Backend("identity-gpu-copy", "GPU copy baseline without compression", decoder=_identity_gpu_decoder, cpu_encoder=lambda raw, options: bytes(raw)),
-    "nvcomp-zstd-raw": Backend("nvcomp-zstd-raw", "standard Zstandard stream", nvcomp_algorithm="Zstd", cpu_encoder=_zstd_encoder),
-    "nvcomp-snappy-raw": Backend("nvcomp-snappy-raw", "standard Snappy stream", nvcomp_algorithm="Snappy", cpu_encoder=lambda raw, options: snappy.compress(raw)),
-    "nvcomp-gzip-raw": Backend("nvcomp-gzip-raw", "standard gzip stream", nvcomp_algorithm="Gzip", cpu_encoder=lambda raw, options: gzip.compress(raw, compresslevel=int(options.get("level", 9)), mtime=0)),
-    "nvcomp-lz4-block-raw": Backend("nvcomp-lz4-block-raw", "raw LZ4 block; not lz4.frame", nvcomp_algorithm="LZ4", cpu_encoder=lambda raw, options: lz4.block.compress(raw, store_size=False)),
-    "nvcomp-deflate-raw": Backend("nvcomp-deflate-raw", "raw Deflate; not zlib-wrapped", nvcomp_algorithm="Deflate", cpu_encoder=_raw_deflate_encoder),
-}
-
+BACKENDS = {}
+_PROVIDERS = {}
+_loaded=False
+def _load():
+    global _loaded
+    if _loaded:return
+    _loaded=True
+    from pathlib import Path
+    import importlib.util,json,sys
+    for manifest in sorted((Path(__file__).resolve().parents[1]/"compressors").glob("*/frame_provider.json")):
+        folder=manifest.parent.resolve();path=(folder/json.loads(manifest.read_text())["file"]).resolve()
+        if not path.is_relative_to(folder):raise ValueError("Provider escapes package")
+        spec=importlib.util.spec_from_file_location("frame_provider_"+folder.name,path)
+        module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
+        for value in module.list_backends():
+            register_backend(value);_PROVIDERS[value.identifier]=module
 
 def backend(identifier: str) -> Backend:
+    _load()
     try:
         return BACKENDS[identifier]
     except KeyError as error:
@@ -67,6 +51,7 @@ def backend(identifier: str) -> Backend:
 
 
 def list_backends():
+    _load()
     return tuple(BACKENDS.values())
 
 
@@ -74,8 +59,6 @@ def register_backend(value: Backend) -> None:
     """Register a framework-owned custom GPU decoder before processing frames."""
     if value.identifier in BACKENDS:
         raise ValueError(f"GPU decode backend already exists: {value.identifier}")
-    if bool(value.nvcomp_algorithm) == bool(value.decoder):
-        raise ValueError("A backend requires exactly one decoder implementation")
     BACKENDS[value.identifier] = value
 
 
@@ -114,32 +97,13 @@ def unpack_frame(frame: bytes):
     return backend_id, raw_bytes, frame[stop:]
 
 
-@lru_cache(maxsize=None)
-def _nvcomp_codec(backend_id: str):
-    from nvidia import nvcomp
-    algorithm = backend(backend_id).nvcomp_algorithm
-    if algorithm is None:
-        raise ValueError(f"{backend_id} is not an nvCOMP backend")
-    return nvcomp.Codec(algorithm=algorithm, bitstream_kind=nvcomp.BitstreamKind.RAW)
-
-
-def decode_gpu_frame(frame: bytes, expected_bytes: int | None = None) -> bytes:
-    """Decode one framed block on the assigned GPU and validate its length."""
-    if not os.environ.get("CUDA_VISIBLE_DEVICES", "").strip():
-        raise RuntimeError("Set CUDA_VISIBLE_DEVICES to an assigned GPU")
-    backend_id, raw_bytes, payload = unpack_frame(frame)
-    if expected_bytes is not None and expected_bytes != raw_bytes:
-        raise ValueError("Expected byte count conflicts with GPU frame")
-    from nvidia import nvcomp
-    selected = backend(backend_id)
-    if selected.decoder:
-        raw = bytes(selected.decoder(payload, raw_bytes))
-    else:
-        raw = bytes(_nvcomp_codec(backend_id).decode(nvcomp.as_array(payload)).cpu())
-    if len(raw) != raw_bytes:
-        raise ValueError("GPU decoder returned an unexpected length")
+def decode_gpu_frame(frame,expected_bytes=None):
+    identifier,size,payload=unpack_frame(frame)
+    if expected_bytes is not None and size!=expected_bytes:raise ValueError("Frame length mismatch")
+    if identifier in _PROVIDERS:return _PROVIDERS[identifier].decode_gpu_frame(frame,expected_bytes)
+    raw=bytes(backend(identifier).decoder(payload,size))
+    if len(raw)!=size:raise ValueError("Decoded length mismatch")
     return raw
-
 
 def compress_cpu_to_gpu_frame(raw: bytes, backend_id: str, encoder_options: dict | None = None) -> bytes:
     return pack_frame(backend_id, len(raw), encode_cpu_payload(raw, backend_id, encoder_options))
