@@ -1,0 +1,6 @@
+{
+  "repository": "LLNL/zfp",
+  "distribution": "zfpy",
+  "version": "1.0.1",
+  "mode": "reversible; default zfpy.compress_numpy options"
+}

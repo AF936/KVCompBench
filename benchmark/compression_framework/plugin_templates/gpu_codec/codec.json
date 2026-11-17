@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "codecs": [
+    {
+      "name": "my-gpu-codec",
+      "kind": "python",
+      "version": "1",
+      "file": "api.py",
+      "interface": "context",
+      "compress": "compress",
+      "decompress": "decompress",
+      "device": "cpu",
+      "gpu_backend": {
+        "type": "module",
+        "id": "my-gpu-codec-v1",
+        "file": "gpu_backend.py",
+        "cpu_encode": "cpu_encode",
+        "gpu_encode": "gpu_encode",
+        "gpu_decode": "gpu_decode",
+        "frame_version": 1
+      }
+    }
+  ]
+}

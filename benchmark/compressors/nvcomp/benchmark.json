@@ -1,0 +1,110 @@
+{
+  "nvcomp-lz4": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:lz4",
+    "algorithm": "LZ4",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-snappy": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:snappy",
+    "algorithm": "Snappy",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-gdeflate": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:gdeflate",
+    "algorithm": "GDeflate",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-deflate": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:deflate",
+    "algorithm": "Deflate",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-bitcomp": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:bitcomp",
+    "algorithm": "Bitcomp",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-ans": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:ans",
+    "algorithm": "ANS",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-zstd": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:zstd",
+    "algorithm": "Zstd",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-cascaded": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:cascaded",
+    "algorithm": "Cascaded",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  },
+  "nvcomp-gzip": {
+    "execution_path": "GPU-GPU",
+    "frame_format": "nvcomp-native:gzip",
+    "algorithm": "Gzip",
+    "raw": false,
+    "file": "benchmark_backend.py",
+    "batch_kind": "nvcomp-batch",
+    "thread_safe": false,
+    "packages": [
+      "nvidia-nvcomp-cu13"
+    ]
+  }
+}

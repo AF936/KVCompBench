@@ -1,0 +1,6 @@
+# CPU APIs used by the unified compression framework.
+numpy>=1.26,<3
+zstandard==0.25.0
+lz4==4.4.5
+python-snappy>=0.7,<1
+fpzip>=1.2,<2
