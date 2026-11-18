@@ -5,6 +5,10 @@ name = linux-x86_64-managed-cpu
 [benchmark_datasets]
 deepseek_bf16.pt = 131072
 qwen_bf16.pt = 524288
+deepseek_fp8_e4m3fn.pt = 66048
+deepseek_fp8_e5m2.pt = 66048
+qwen_fp8_e4m3fn.pt = 532480
+qwen_fp8_e5m2.pt = 532480
 
 [benchmark]
 cpu_encode_threads = 1
@@ -26,4 +30,32 @@ layout = kv
 axes = layer,token,latent
 page_tokens = 128
 kv_semantics = shared
+
+[dataset:deepseek_fp8_e4m3fn.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+dtype = fp8_e4m3fn
+
+[dataset:deepseek_fp8_e5m2.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+dtype = fp8_e5m2
+
+[dataset:qwen_fp8_e4m3fn.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+dtype = fp8_e4m3fn
+
+[dataset:qwen_fp8_e5m2.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+dtype = fp8_e5m2
 

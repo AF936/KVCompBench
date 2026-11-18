@@ -19,6 +19,7 @@ class Route:
     folder:Path
     options:dict
     gpu:object=None
+    dtype:str="bf16"
     @property
     def mode(self):return self.options['execution_path']
     @property
@@ -39,7 +40,7 @@ class Route:
     def encode_cpu(self,raw,dtype='bf16'):
         return self.gpu.encode_cpu(raw,dtype) if self.gpu else self.plugin.compress(raw,{'dtype':dtype})
     def decode_gpu(self,frame,size):
-        return self.gpu.decode_gpu(frame,size) if self.gpu else self.plugin.decompress(frame,size,{'dtype':'bf16'})
+        return self.gpu.decode_gpu(frame,size) if self.gpu else self.plugin.decompress(frame,size,{'dtype':self.dtype})
 
 def package_tier(folder):
     metadata = Path(folder)/'package.json'
@@ -52,7 +53,7 @@ def package_tier(folder):
     return tier
 
 
-def discover_routes(directory, codec_set='all', execution_device='declared'):
+def discover_routes(directory, codec_set='all', execution_device='declared', dtype='bf16'):
     if codec_set not in ('core', 'all'):
         raise ValueError('codec_set must be core or all')
     if execution_device not in ('cpu', 'declared'):
@@ -67,9 +68,12 @@ def discover_routes(directory, codec_set='all', execution_device='declared'):
     for name,plugin in plugins.items():
         folder=folders[name]
         if codec_set=='core' and package_tier(folder)!='core':continue
-        if not plugin.supports({'dtype':'bf16'}):continue
+        metadata_file=folder/'package.json'
+        metadata=json.loads(metadata_file.read_text()) if metadata_file.exists() else {}
+        if dtype not in metadata.get('benchmark_dtypes',['bf16']):continue
+        if not plugin.supports({'dtype':dtype}):continue
         if execution_device=='cpu':
-            if getattr(plugin,'entry',{}).get('adapter')=='gpu-api':continue
+            if getattr(plugin,'entry',{}).get('adapter')=='gpu-api' or getattr(plugin,'spec',{}).get('device')=='gpu':continue
             options=dict(execution_path='CPU-CPU',frame_format='plugin:'+name,thread_safe=True,batch_kind='cpu-single')
         else:
             manifest=folder/'benchmark.json'
@@ -78,18 +82,31 @@ def discover_routes(directory, codec_set='all', execution_device='declared'):
                 options=dict(execution_path='CPU-CPU',frame_format='plugin:'+name,thread_safe=True,batch_kind='cpu-single')
         if options['execution_path'] not in ('CPU-CPU','CPU-GPU','GPU-GPU'):raise ValueError('Invalid execution_path')
         if options['execution_path'].endswith('-GPU') and not options.get('file'):raise ValueError('GPU route requires a backend file')
-        routes[name]=Route(name,plugin,folder,options,gpu.get(name) if options.get('use_gpu_frame') else None)
+        routes[name]=Route(name,plugin,folder,options,gpu.get(name) if options.get('use_gpu_frame') else None,dtype=dtype)
     return routes
 
 
-def select_routes(directory, codec_set="core", execution_device="cpu", codecs=None):
-    """An explicit name list overrides package tiers, never device/dtype support."""
+def select_routes(directory, codec_set="core", execution_device="cpu", codecs=None,
+                  dtype="bf16", skip_incompatible=False, omitted=None):
     if codecs is None or not codecs.strip():
-        return discover_routes(directory,codec_set=codec_set,execution_device=execution_device)
-    names=[name.strip() for name in codecs.split(",")]
-    if any(not name for name in names):raise ValueError("Empty codec name in codecs")
-    if len(names)!=len(set(names)):raise ValueError("Duplicate codec names in codecs")
-    routes=discover_routes(directory,codec_set="all",execution_device=execution_device)
-    missing=set(names)-routes.keys()
-    if missing:raise ValueError("Unknown or incompatible codecs: "+", ".join(sorted(missing)))
-    return {name:routes[name] for name in names}
+        routes = discover_routes(directory, codec_set=codec_set, execution_device=execution_device, dtype=dtype)
+        if omitted is not None and dtype != 'bf16':
+            baseline = discover_routes(directory, codec_set=codec_set, execution_device=execution_device, dtype='bf16')
+            omitted.update({name: 'Unsupported input dtype: '+dtype for name in baseline.keys()-routes.keys()})
+        return routes
+    names = [name.strip() for name in codecs.split(',')]
+    if any(not name for name in names):
+        raise ValueError('Empty codec name in codecs')
+    if len(names) != len(set(names)):
+        raise ValueError('Duplicate codec names in codecs')
+    known = load_plugins(directory)
+    unknown = set(names)-known.keys()
+    if unknown:
+        raise ValueError('Unknown codecs: '+', '.join(sorted(unknown)))
+    routes = discover_routes(directory, codec_set='all', execution_device=execution_device, dtype=dtype)
+    missing = set(names)-routes.keys()
+    if missing and not skip_incompatible:
+        raise ValueError('Incompatible codecs for '+dtype+': '+', '.join(sorted(missing)))
+    if omitted is not None:
+        omitted.update({name: 'Unsupported input dtype or execution device: '+dtype for name in sorted(missing)})
+    return {name: routes[name] for name in names if name in routes}

@@ -1,6 +1,6 @@
 """Common timing boundaries. Codec setup and data movement are reported separately."""
 import time
-TIMING_VERSION='codec_call_v3_kv_pages_shared_encode'
+TIMING_VERSION='codec_call_v4_scaled_fp8_shared_encode'
 
 def gpu_call(function,stream,warmup=False):
     import torch

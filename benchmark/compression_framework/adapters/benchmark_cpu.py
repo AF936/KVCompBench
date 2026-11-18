@@ -7,7 +7,7 @@ class CPUBackend:
         self.thread_safe=route.options.get('thread_safe',True)
     def setup(self,sample):
         if self.route.gpu and self.route.gpu.declaration['type']=='module':self.route.gpu._load_module()
-        elif hasattr(self.route.plugin,'prepare'):self.route.plugin.prepare({'dtype':'bf16'})
+        elif hasattr(self.route.plugin,'prepare'):self.route.plugin.prepare({'dtype':self.route.dtype})
     def prepare_encode(self,raw):return raw
     def encode(self,raw):
         gpu=self.route.gpu
@@ -15,7 +15,7 @@ class CPUBackend:
             from gpu_decode import backend
             if gpu.declaration['type']=='shared':return backend(gpu.backend_id).cpu_encoder(raw,dict(gpu.declaration.get('encoder_options',{})))
             return getattr(gpu._load_module(),gpu.declaration['cpu_encode'])(raw)
-        return self.route.plugin.compress(raw,{'dtype':'bf16'})
+        return self.route.plugin.compress(raw,{'dtype':self.route.dtype})
     def finish_encode(self,value,size):
         if self.route.gpu:
             from gpu_decode import pack_frame
@@ -23,6 +23,6 @@ class CPUBackend:
         return bytes(value)
     def cpu_decoder(self):
         if self.route.mode.endswith('-CPU'):
-            return lambda frame,size:self.route.plugin.decompress(frame,size,{'dtype':'bf16'})
+            return lambda frame,size:self.route.plugin.decompress(frame,size,{'dtype':self.route.dtype})
         from cpu_decode_registry import resolve_decoder
         return resolve_decoder(self.route)[0]
