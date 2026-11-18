@@ -64,7 +64,7 @@ def write_png(path, rows, codec_names):
         mode = next(r['execution_path'] for r in rows if r['codec'] == codec)
         text(margin + index * cell_w, 67, mode, scale=2)
     for index, dataset in enumerate(datasets):
-        label = dataset.replace("_bf16", "")
+        label = dataset
         label_scale = 1 if len(label) * 12 > margin - 44 else 2
         text(22, 125 + index * cell_h, label, scale=label_scale)
     raw = b"".join(b"\0" + pixels[y * width * 4:(y + 1) * width * 4] for y in range(height))

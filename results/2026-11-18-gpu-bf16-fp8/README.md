@@ -19,7 +19,7 @@ The branch also contains the FP8 implementation ported onto the manifest-managed
 ## Files and reproducibility
 
 - `result.csv`: all 176 measured configurations; `gpu_results.csv`: the 116 GPU decoder paths.
-- `heatmap.html` and `heatmap.png`: original generated reports.
+- `heatmap.html` and `heatmap.png`: reports regenerated to retain explicit BF16 labels alongside FP8 labels; measured values are unchanged.
 - `input_manifest.json`: six input hashes, sizes, tensor shapes, layouts and source/quantization metadata. Model names are retained as supplied metadata; exact checkpoint revisions and weight quantization settings were not independently established.
 - `job_specs.json`, `environment.json`, `settings.example.txt` and `measured_source_sha256.json`: measured configuration and provenance. The example retains portable environment naming instead of the server's absolute interpreter path.
 - `capabilities.json` and `unavailable_codecs.json`: available paths and explicit unsupported combinations.
