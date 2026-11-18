@@ -1,0 +1,28 @@
+{
+  "code_bundle_sha256": "6f5268ff95d8d495bc2513d0585ca105e568c8493a4cb10cecd25f669bd3b619",
+  "compatible_cpu_rows": 60,
+  "datasets": {
+    "deepseek_bf16": 30,
+    "deepseek_fp8_e4m3fn": 29,
+    "deepseek_fp8_e5m2": 29,
+    "qwen_bf16": 30,
+    "qwen_fp8_e4m3fn": 29,
+    "qwen_fp8_e5m2": 29
+  },
+  "gpu_rows": 116,
+  "journal_sha256": "a0eb3ae60c9aae0ae7875316c185d13a5b30a1ef095378698289044adce27288",
+  "journal_verified": true,
+  "last_encode_ended_epoch": 9261488.780050796,
+  "measured_source": "X-drive source snapshot; legacy installer and runtime discovery",
+  "measurement_scope": "one complete pass; no independent performance repeats",
+  "measurement_started_epoch": 9256960.651359744,
+  "rows": 176,
+  "skipped": {
+    "deepseek_fp8_e4m3fn.pt::splitzip": "Unsupported input dtype or execution device: fp8_e4m3fn",
+    "deepseek_fp8_e5m2.pt::splitzip": "Unsupported input dtype or execution device: fp8_e5m2",
+    "qwen_fp8_e4m3fn.pt::splitzip": "Unsupported input dtype or execution device: fp8_e4m3fn",
+    "qwen_fp8_e5m2.pt::splitzip": "Unsupported input dtype or execution device: fp8_e5m2"
+  },
+  "timing_version": "codec_call_v4_scaled_fp8_shared_encode",
+  "verified_page_decodes": 491568
+}

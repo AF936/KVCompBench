@@ -1,0 +1,282 @@
+{
+  "deepseek_bf16.pt": {
+    "file_bytes": 664670231,
+    "layout": {
+      "axes": "layer,token,latent",
+      "block_bytes": 131072,
+      "kv_semantics": "shared",
+      "layout": "kv",
+      "page_tokens": "128"
+    },
+    "metadata": {
+      "conversion": "native FP8 NoPE dequantized with UE8M0 scales; BF16 RoPE copied exactly; result stored as BF16",
+      "format": "deepseek_v4_flash_shared_kv_bf16_merged",
+      "key_value_shared": true,
+      "page_format": "tensor-bytes-v1",
+      "prequant_bf16_exactly_recoverable": false,
+      "quantization_origin": "unspecified",
+      "shape_semantics": [
+        "layer",
+        "valid_token",
+        "shared_kv_latent"
+      ],
+      "source_fp8_dtype": "torch.float8_e4m3fn",
+      "storage_dtype": "bf16",
+      "stored_dtype": "torch.bfloat16"
+    },
+    "page_format": "tensor-bytes-v1",
+    "sha256": "cf17674a3e32a9539c26fa483b2728590c9a4a51f4bbb46729d38b12509b43ca",
+    "shape": [
+      43,
+      15095,
+      512
+    ],
+    "storage_dtype": "bf16"
+  },
+  "deepseek_fp8_e4m3fn.pt": {
+    "file_bytes": 334935519,
+    "layout": {
+      "axes": "layer,token,latent",
+      "block_bytes": 66048,
+      "dtype": "fp8_e4m3fn",
+      "kv_semantics": "shared",
+      "layout": "kv",
+      "page_tokens": "128"
+    },
+    "metadata": {
+      "conversion": "native FP8 NoPE dequantized with UE8M0 scales; BF16 RoPE copied exactly; result stored as BF16",
+      "format": "deepseek_v4_flash_shared_kv_bf16_merged_fp8_quantized",
+      "key_value_shared": true,
+      "page_format": "data+fp32-scale-v1",
+      "pre_quantization_dtype": "torch.bfloat16",
+      "prequant_bf16_exactly_recoverable": false,
+      "quantization": {
+        "axis": [
+          2
+        ],
+        "dequantization": "data.to(torch.float32) * scale",
+        "dtype": "torch.float8_e4m3fn",
+        "fp8_format": "e4m3fn",
+        "fp8_max": 448.0,
+        "scale_dtype": "torch.float32",
+        "scheme": "symmetric_dynamic_scaled_float8"
+      },
+      "quantization_metrics": {
+        "max_absolute_error": 0.5,
+        "mean_absolute_error": 0.013728956691920757,
+        "mean_squared_error": 0.0004810415848623961,
+        "sqnr_db": 31.876395667744816
+      },
+      "quantization_origin": "requantized_bf16",
+      "scale_axis": 2,
+      "scale_dtype": "fp32",
+      "scale_shape": [
+        43,
+        15095,
+        1
+      ],
+      "shape_semantics": [
+        "layer",
+        "valid_token",
+        "shared_kv_latent"
+      ],
+      "source_file": "deepseek_bf16.pt",
+      "source_format": "deepseek_v4_flash_shared_kv_bf16_merged",
+      "source_fp8_dtype": "torch.float8_e4m3fn",
+      "storage_dtype": "fp8_e4m3fn",
+      "stored_dtype": "torch.float8_e4m3fn"
+    },
+    "page_format": "data+fp32-scale-v1",
+    "sha256": "c5dea3b77113203e959a23423d6be9e4068c06a5bd0016a3a59e1227b9c04ffe",
+    "shape": [
+      43,
+      15095,
+      512
+    ],
+    "storage_dtype": "fp8_e4m3fn"
+  },
+  "deepseek_fp8_e5m2.pt": {
+    "file_bytes": 334935427,
+    "layout": {
+      "axes": "layer,token,latent",
+      "block_bytes": 66048,
+      "dtype": "fp8_e5m2",
+      "kv_semantics": "shared",
+      "layout": "kv",
+      "page_tokens": "128"
+    },
+    "metadata": {
+      "conversion": "native FP8 NoPE dequantized with UE8M0 scales; BF16 RoPE copied exactly; result stored as BF16",
+      "format": "deepseek_v4_flash_shared_kv_bf16_merged_fp8_quantized",
+      "key_value_shared": true,
+      "page_format": "data+fp32-scale-v1",
+      "pre_quantization_dtype": "torch.bfloat16",
+      "prequant_bf16_exactly_recoverable": false,
+      "quantization": {
+        "axis": [
+          2
+        ],
+        "dequantization": "data.to(torch.float32) * scale",
+        "dtype": "torch.float8_e5m2",
+        "fp8_format": "e5m2",
+        "fp8_max": 57344.0,
+        "scale_dtype": "torch.float32",
+        "scheme": "symmetric_dynamic_scaled_float8"
+      },
+      "quantization_metrics": {
+        "max_absolute_error": 1.0714292526245117,
+        "mean_absolute_error": 0.027714697644114494,
+        "mean_squared_error": 0.0019257995299994946,
+        "sqnr_db": 25.852111120832998
+      },
+      "quantization_origin": "requantized_bf16",
+      "scale_axis": 2,
+      "scale_dtype": "fp32",
+      "scale_shape": [
+        43,
+        15095,
+        1
+      ],
+      "shape_semantics": [
+        "layer",
+        "valid_token",
+        "shared_kv_latent"
+      ],
+      "source_file": "deepseek_bf16.pt",
+      "source_format": "deepseek_v4_flash_shared_kv_bf16_merged",
+      "source_fp8_dtype": "torch.float8_e4m3fn",
+      "storage_dtype": "fp8_e5m2",
+      "stored_dtype": "torch.float8_e5m2"
+    },
+    "page_format": "data+fp32-scale-v1",
+    "sha256": "cac5e4d204ee5e214110cbf3a2574214d86d62de2912eeb981e19f47b450f803",
+    "shape": [
+      43,
+      15095,
+      512
+    ],
+    "storage_dtype": "fp8_e5m2"
+  },
+  "qwen_bf16.pt": {
+    "file_bytes": 536872574,
+    "layout": {
+      "axes": "layer,kv,batch,head,token,dim",
+      "block_bytes": 524288,
+      "kv_semantics": "separate",
+      "layout": "kv",
+      "page_tokens": "256"
+    },
+    "metadata": {
+      "page_format": "tensor-bytes-v1",
+      "quantization_origin": "unspecified",
+      "storage_dtype": "bf16"
+    },
+    "page_format": "tensor-bytes-v1",
+    "sha256": "30f0f1eb679e70f7874d6c9114cbfdddc1dd740ea6fc2c41efe9c7ae5a6a3635",
+    "shape": [
+      16,
+      2,
+      1,
+      4,
+      8192,
+      256
+    ],
+    "storage_dtype": "bf16"
+  },
+  "qwen_fp8_e4m3fn.pt": {
+    "file_bytes": 272632125,
+    "layout": {
+      "axes": "layer,kv,batch,head,token,dim",
+      "block_bytes": 532480,
+      "dtype": "fp8_e4m3fn",
+      "kv_semantics": "separate",
+      "layout": "kv",
+      "page_tokens": "256"
+    },
+    "metadata": {
+      "page_format": "data+fp32-scale-v1",
+      "quantization": {},
+      "quantization_origin": "requantized_bf16",
+      "scale_axis": -1,
+      "scale_dtype": "fp32",
+      "scale_shape": [
+        16,
+        2,
+        1,
+        4,
+        8192,
+        1
+      ],
+      "scheme": "scaled_fp8_e4m3fn",
+      "shape_semantics": [
+        "full_attention_layer",
+        "kv_kind",
+        "batch",
+        "kv_head",
+        "token",
+        "head_dim"
+      ],
+      "source_dtype": "torch.bfloat16",
+      "storage_dtype": "fp8_e4m3fn"
+    },
+    "page_format": "data+fp32-scale-v1",
+    "sha256": "965588d1f8f8d37edcebc394bef30179ccd032368342d03b6dfe62e72f6e98a2",
+    "shape": [
+      16,
+      2,
+      1,
+      4,
+      8192,
+      256
+    ],
+    "storage_dtype": "fp8_e4m3fn"
+  },
+  "qwen_fp8_e5m2.pt": {
+    "file_bytes": 272632109,
+    "layout": {
+      "axes": "layer,kv,batch,head,token,dim",
+      "block_bytes": 532480,
+      "dtype": "fp8_e5m2",
+      "kv_semantics": "separate",
+      "layout": "kv",
+      "page_tokens": "256"
+    },
+    "metadata": {
+      "page_format": "data+fp32-scale-v1",
+      "quantization": {},
+      "quantization_origin": "requantized_bf16",
+      "scale_axis": -1,
+      "scale_dtype": "fp32",
+      "scale_shape": [
+        16,
+        2,
+        1,
+        4,
+        8192,
+        1
+      ],
+      "scheme": "scaled_fp8_e5m2",
+      "shape_semantics": [
+        "full_attention_layer",
+        "kv_kind",
+        "batch",
+        "kv_head",
+        "token",
+        "head_dim"
+      ],
+      "source_dtype": "torch.bfloat16",
+      "storage_dtype": "fp8_e5m2"
+    },
+    "page_format": "data+fp32-scale-v1",
+    "sha256": "2d1fead6514c2f055fd8b372d3f71c00d7ef4c3af3567df23eb0911d994fd377",
+    "shape": [
+      16,
+      2,
+      1,
+      4,
+      8192,
+      256
+    ],
+    "storage_dtype": "fp8_e5m2"
+  }
+}
