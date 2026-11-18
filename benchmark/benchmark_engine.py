@@ -4,7 +4,8 @@ import struct,zlib
 def write_png(path, rows, codec_names):
     # Dependency-free PNG heatmap: rows=datasets, columns=codecs, green=larger ratio.
     margin, cell_w, cell_h = 220, 210, 95
-    width, height = max(980, margin + len(codec_names) * cell_w + 30), 340
+    datasets = sorted({row["dataset"] for row in rows})
+    width, height = max(980, margin + len(codec_names) * cell_w + 30), max(340, 95 + len(datasets) * cell_h + 55)
     pixels = bytearray([13, 20, 31, 255]) * (width * height)
     font = {
         'C':('01111','10000','10000','10000','10000','10000','01111'),
@@ -44,7 +45,7 @@ def write_png(path, rows, codec_names):
             x += 6 * scale
     text(margin, 12, 'CODEC PATH', scale=2)
     maximum = max(1.0, *(row["compression_ratio"] for row in rows))
-    for y, dataset in enumerate(sorted({row["dataset"] for row in rows})):
+    for y, dataset in enumerate(datasets):
         for x, codec in enumerate(codec_names):
             row = next((r for r in rows if r["dataset"] == dataset and r["codec"] == codec), None)
             if not row:
@@ -62,7 +63,10 @@ def write_png(path, rows, codec_names):
         text(margin + index * cell_w, 47, headers.get(codec, codec.upper()), scale=1)
         mode = next(r['execution_path'] for r in rows if r['codec'] == codec)
         text(margin + index * cell_w, 67, mode, scale=2)
-    for index, dataset in enumerate(sorted({row["dataset"] for row in rows})): text(22, 125 + index * cell_h, dataset.replace("_bf16", ""), scale=2)
+    for index, dataset in enumerate(datasets):
+        label = dataset.replace("_bf16", "")
+        label_scale = 1 if len(label) * 12 > margin - 44 else 2
+        text(22, 125 + index * cell_h, label, scale=label_scale)
     raw = b"".join(b"\0" + pixels[y * width * 4:(y + 1) * width * 4] for y in range(height))
     def chunk(kind, data):
         return struct.pack(">I", len(data)) + kind + data + struct.pack(">I", zlib.crc32(kind + data) & 0xffffffff)

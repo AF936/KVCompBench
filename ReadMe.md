@@ -91,3 +91,17 @@ python3 benchmark/html_report.py benchmark/output/core_full
 [2026-11-17 经典 BF16 CPU/GPU 全量结果](results/2026-11-17-classic-bf16/README.md)：26 项路径配置，72,618 块全部通过逐字节验证。结果快照不包含输入数据或本机配置。
 
 [2026-11-17 GPU BF16 全量复测结果](results/2026-11-17-gpu-bf16/README.md)：20 个 GPU 配置覆盖两个完整数据集，含 40 条 GPU 路径与 20 条兼容 CPU 解码结果；111,720 个 GPU 页面全部通过逐字节校验。提供 Codec 与页面吞吐两种口径，测量提交为 `6ed1268`。
+
+## BF16 与 scaled FP8 输入
+
+`settings.txt` 可同时列出两份 BF16 和四份 E4M3FN/E5M2 数据。每个 dataset 节支持 `dtype = auto` 或明确的 `bf16`、`fp8_e4m3fn`、`fp8_e5m2`，声明值必须与存储张量一致。
+
+FP8 输入采用 `data` 张量和 FP32 `scale`。支持顶层 `scale` 及 DeepSeek 的 `quantization.scale`，当前要求最后一维逐向量缩放。KV 页按原有 layer/batch/token 范围同步切片 data 与 scale。页面负载依次存放 data 字节和 scale 字节，区段偏移、字节数、形状和量化来源保存在任务清单及续跑日志中。
+
+DeepSeek 的 128-token FP8 页为 64 KiB data 加 512 B scale，共 64.5 KiB。Qwen 的 256-token FP8 页为 512 KiB data 加 8 KiB scale，共 520 KiB。尾页使用真实 token 数。flat 基线按完整 data 字节流随后接 scale 字节流进行分块。
+
+压缩率与吞吐分母包含 data 和 scale。逐字节校验覆盖两部分，量化误差元数据单独记录。当前四份 FP8 文件由 BF16 再量化得到，结果标记 `requantized_bf16`。DeepSeek 的原始 NoPE/RoPE 转换说明作为来源链保留。
+
+包级 `package.json` 中的 `benchmark_dtypes` 声明完整页面负载支持的精度。字节流 Codec 可声明 BF16 和两种 FP8。SplitZip 等依赖 BF16 位结构的 Codec 按能力跳过 FP8，并在报告中记录原因。新增 typed FP8 Codec 时，需要实现完整 data/scale 页面协议后再声明支持。
+
+报告支持存储精度筛选，并展示 `storage_dtype`、`page_format`、`data_bytes`、`scale_bytes`、`quantization_origin`。格式和缩放信息参与续跑指纹。默认结果目录为 `benchmark/output/kv_pages_v4_fp8`。使用 `--validate-only` 可先检查每份输入的首个、第二个和首层尾页。

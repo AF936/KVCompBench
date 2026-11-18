@@ -1,0 +1,6 @@
+{
+  "deepseek_fp8_e4m3fn.pt::splitzip": "Unsupported input dtype or execution device: fp8_e4m3fn",
+  "deepseek_fp8_e5m2.pt::splitzip": "Unsupported input dtype or execution device: fp8_e5m2",
+  "qwen_fp8_e4m3fn.pt::splitzip": "Unsupported input dtype or execution device: fp8_e4m3fn",
+  "qwen_fp8_e5m2.pt::splitzip": "Unsupported input dtype or execution device: fp8_e5m2"
+}

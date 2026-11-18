@@ -7,6 +7,7 @@
 <label>显示指标<select id="metric"><option value="compression_ratio">压缩比（原始 / 压缩）</option><option value="encode_mib_s">编码吞吐量（MiB/s）</option><option value="decode_mib_s">解码吞吐量（MiB/s）</option><option value="encode_page_mib_s">编码页面吞吐量（MiB/s，含准备与传输）</option><option value="decode_page_mib_s">解码页面吞吐量（MiB/s，含准备与传输）</option></select></label>
 <label>解码端<select id="decoder"><option value="GPU">GPU 解码</option><option value="CPU">CPU 解码</option></select></label>
 <label>执行路径<select id="route"><option value="all">全部</option><option>CPU-CPU</option><option>CPU-GPU</option><option>GPU-GPU</option><option>GPU-CPU</option></select></label>
+<label>存储精度<select id="storage"><option value="all">全部</option></select></label>
 <button id="download">下载结果 CSV</button>
 <p>选择 CPU 或 GPU 解码端查看对应实测数据；没有对应方案或尚无实测结果时显示“/”。</p><div class="scroll"><table id="heatmap" aria-label="全量测试热力图"></table></div>
 <div class="legend"><span>较低</span><span class="gradient"></span><span>较高（当前指标共用线性色标）</span></div>

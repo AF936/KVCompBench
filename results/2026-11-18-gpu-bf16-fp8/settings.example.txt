@@ -1,0 +1,59 @@
+[environment]
+name = linux-x86_64-managed-cuda13
+
+[benchmark_datasets]
+deepseek_bf16.pt = 131072
+qwen_bf16.pt = 524288
+deepseek_fp8_e4m3fn.pt = 66048
+deepseek_fp8_e5m2.pt = 66048
+qwen_fp8_e4m3fn.pt = 532480
+qwen_fp8_e5m2.pt = 532480
+
+[benchmark]
+cpu_encode_threads = 1
+decode_batch_blocks = 256
+skip_unavailable_codecs = false
+codec_set = all
+codecs = gzip,lz4,nvcomp-lz4,nvcomp-snappy,nvcomp-gdeflate,nvcomp-deflate,nvcomp-bitcomp,nvcomp-ans,nvcomp-zstd,nvcomp-cascaded,nvcomp-gzip,openzl,snappy,splitzip,zlib,zlib:1,zlib:6,zstd:1,zstd:3,zstd:9
+execution_device = declared
+
+[dataset:qwen_bf16.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+
+[dataset:deepseek_bf16.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+
+[dataset:deepseek_fp8_e4m3fn.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+dtype = fp8_e4m3fn
+
+[dataset:deepseek_fp8_e5m2.pt]
+layout = kv
+axes = layer,token,latent
+page_tokens = 128
+kv_semantics = shared
+dtype = fp8_e5m2
+
+[dataset:qwen_fp8_e4m3fn.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+dtype = fp8_e4m3fn
+
+[dataset:qwen_fp8_e5m2.pt]
+layout = kv
+axes = layer,kv,batch,head,token,dim
+page_tokens = 256
+kv_semantics = separate
+dtype = fp8_e5m2
+

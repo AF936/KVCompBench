@@ -40,33 +40,38 @@ def append(path,kind,job,records):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,default=Path(__file__).resolve().parents[1]);p.add_argument('--output',type=Path)
     p.add_argument('--validate-only',action='store_true');p.add_argument('--codecs',help='Optional comma-separated validation subset');p.add_argument('--cpu-only',action='store_true');p.add_argument('--settings',type=Path);args=p.parse_args()
-    root=args.root.resolve();out=(args.output or root/'benchmark/output/kv_pages_v3').resolve()
+    root=args.root.resolve();out=(args.output or root/'benchmark/output/kv_pages_v4_fp8').resolve()
     if not out.is_relative_to(root/'benchmark/output'):raise ValueError('Output must be under benchmark/output')
     out.mkdir(parents=True,exist_ok=True);journal=out/'progress.jsonl';done,encodes=load_journal(journal)
     config=args.settings or root/'benchmark/settings.txt';c=configparser.ConfigParser(interpolation=None);c.read(config)
     workers=c.getint('benchmark','cpu_encode_threads',fallback=1);batch_size=c.getint('benchmark','decode_batch_blocks',fallback=256)
     if not 1<=workers<=256 or not 1<=batch_size<=4096:raise ValueError('Invalid workers/batch size')
-    routes=select_routes(root/'benchmark/compressors',codec_set=c.get('benchmark','codec_set',fallback='core'),execution_device='cpu' if args.cpu_only else c.get('benchmark','execution_device',fallback='cpu'),codecs=args.codecs if args.codecs is not None else c.get('benchmark','codecs',fallback=None))
-    if args.cpu_only:routes={name:r for name,r in routes.items() if r.mode=='CPU-CPU'}
-    if not routes:raise ValueError('No eligible codecs')
-    omitted={}
-    if c.getboolean('benchmark','skip_unavailable_codecs',fallback=False):
-        from runtime_support import unavailable
-        for name,route in list(routes.items()):
-            reason=unavailable(route,root/'benchmark/compressors')
-            if reason:
-                if args.codecs or c.get('benchmark','codecs',fallback='').strip():raise RuntimeError(name+': '+reason)
-                omitted[name]=reason;del routes[name]
     import torch
-    using_gpu=any(r.mode.endswith('-GPU') for r in routes.values())
-    if using_gpu and not os.environ.get('CUDA_VISIBLE_DEVICES'):raise RuntimeError('Set an authorized CUDA_VISIBLE_DEVICES')
-    environment=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(0) if using_gpu else 'CPU')
+    omitted={}
     common={str(f.relative_to(root)):digest(f) for f in sorted((root/'benchmark/compression_framework').rglob('*.py')) if '__pycache__' not in f.parts}
     common['runner']=digest(__file__);rows=[];capabilities=[]
     for filename,layout in dataset_configs(config).items():
         path=root/'benchmark/input'/filename;pages=Pages(path,layout)
         if args.validate_only:pages=validation_subset(pages)
         count=len(pages)
+        dataset_omitted={}
+        routes=select_routes(root/'benchmark/compressors',codec_set=c.get('benchmark','codec_set',fallback='core'),execution_device='cpu' if args.cpu_only else c.get('benchmark','execution_device',fallback='cpu'),codecs=args.codecs if args.codecs is not None else c.get('benchmark','codecs',fallback=None),dtype=pages.dtype,skip_incompatible=True,omitted=dataset_omitted)
+        if args.cpu_only:routes={name:r for name,r in routes.items() if r.mode=='CPU-CPU'}
+        if not routes:
+            omitted.update({filename+'::'+name:reason for name,reason in dataset_omitted.items()})
+            print('SKIP',filename,'no compatible codecs',flush=True)
+            continue
+        if c.getboolean('benchmark','skip_unavailable_codecs',fallback=False):
+            from runtime_support import unavailable
+            for name,route in list(routes.items()):
+                reason=unavailable(route,root/'benchmark/compressors')
+                if reason:
+                    if args.codecs or c.get('benchmark','codecs',fallback='').strip():raise RuntimeError(name+': '+reason)
+                    dataset_omitted[name]=reason;del routes[name]
+        omitted.update({filename+'::'+name:reason for name,reason in dataset_omitted.items()})
+        using_gpu=any(r.mode.endswith('-GPU') for r in routes.values())
+        if using_gpu and not os.environ.get('CUDA_VISIBLE_DEVICES'):raise RuntimeError('Set an authorized CUDA_VISIBLE_DEVICES')
+        environment=dict(python=sys.version,torch=torch.__version__,cuda=torch.version.cuda,device=torch.cuda.get_device_name(0) if using_gpu else 'CPU')
         input_hash=digest(path);sample=pages[0]
         for name,route in routes.items():
             from codec_manager import identity
@@ -74,7 +79,7 @@ def main():
             runtime=route.runtime();cpu=runtime.cpu_decoder()
             modes=[route.mode]
             if route.mode.endswith('-GPU') and cpu is not None:modes.append(route.mode.split('-')[0]+'-CPU')
-            capabilities.append(dict(codec=name,original=route.mode,cpu_available=cpu is not None,frame_format=route.backend_id,batch_kind=route.options['batch_kind']))
+            capabilities.append(dict(dataset=filename,storage_dtype=pages.dtype,codec=name,original=route.mode,cpu_available=cpu is not None,frame_format=route.backend_id,batch_kind=route.options['batch_kind']))
             source={str(f.relative_to(route.folder)):digest(f) for f in sorted(route.folder.rglob('*')) if f.is_file() and f.suffix in ('.py','.json','.so','.dll','.pyd') and '__pycache__' not in f.parts}
             packages={}
             declarations=json.loads((route.folder/'codec.json').read_text())['codecs']
@@ -87,7 +92,7 @@ def main():
             for dist in filter(None,distributions):
                 try:packages[dist]=md.version(dist)
                 except md.PackageNotFoundError:packages[dist]='unavailable'
-            spec=dict(installation=installation,dataset=filename,input_sha256=input_hash,shape=pages.shape,dataset_metadata=pages.dataset_metadata,layout=layout,codec=name,source=source,packages=packages,frame_format=route.backend_id,options=route.options,framework=common,environment=environment,workers=workers,timing=TIMING_VERSION,validation=args.validate_only,count=count)
+            spec=dict(installation=installation,storage_dtype=pages.dtype,page_format=pages.page_format,dataset=filename,input_sha256=input_hash,shape=pages.shape,dataset_metadata=pages.dataset_metadata,layout=layout,codec=name,source=source,packages=packages,frame_format=route.backend_id,options=route.options,framework=common,environment=environment,workers=workers,timing=TIMING_VERSION,validation=args.validate_only,count=count)
             encjob=fingerprint(spec);jobs={mode:fingerprint(dict(encoder=encjob,mode=mode,batch=batch_size if mode.endswith('-GPU') else 1)) for mode in modes}
             for mode,job in jobs.items():(out/('job_'+job+'.json')).write_text(json.dumps(dict(spec,mode=mode,encode_job=encjob),sort_keys=True))
             gpu=BatchDecoder(runtime) if route.mode.endswith('-GPU') else None;cpu_warmed=set();effective=workers if runtime.thread_safe and route.mode.startswith('CPU-') else 1
@@ -153,7 +158,7 @@ def main():
             if not any(cache.iterdir()):cache.rmdir()
             for mode,job in jobs.items():
                 records=[done[(job,i)] for i in range(count)];raw=sum(r['raw_bytes'] for r in records);packed=sum(r['compressed_bytes'] for r in records)
-                row=dict(dataset=path.stem,validation_only=args.validate_only,codec=name,execution_path=mode,job_fingerprint=job,encode_job=encjob,frame_format=route.backend_id,layout=layout['layout'],page_tokens=layout.get('page_tokens',''),block_bytes=pages.block_bytes,cpu_encode_threads=effective,decode_batch_blocks=batch_size if mode.endswith('-GPU') else 1,decode_batch_kind=records[0]['decode_batch_kind'],blocks=count,verified_blocks=count,raw_bytes=raw,compressed_bytes=packed,compression_ratio=raw/packed,encode_mib_s=raw/1048576/sum(r['encode_seconds'] for r in records),decode_mib_s=raw/1048576/sum(r['decode_seconds'] for r in records),encode_page_mib_s=raw/1048576/sum(r['encode_page_seconds'] for r in records),decode_page_mib_s=raw/1048576/sum(r['decode_page_seconds'] for r in records),setup_seconds=records[0].get('setup_seconds',0),timing_version=TIMING_VERSION,encode_timing_scope='gpu_codec_call_cuda_events' if mode.startswith('GPU-') else 'cpu_codec_call_perf_counter',decode_timing_scope='gpu_codec_call_cuda_events' if mode.endswith('-GPU') else 'cpu_codec_call_perf_counter')
+                row=dict(quantization_metrics=json.dumps(pages.dataset_metadata.get('quantization_metrics',{}),sort_keys=True),storage_dtype=pages.dtype,page_format=pages.page_format,quantization_origin=pages.quantization_origin,data_bytes=sum(r['page']['data_bytes'] for r in records),scale_bytes=sum(r['page']['scale_bytes'] for r in records),dataset=path.stem,validation_only=args.validate_only,codec=name,execution_path=mode,job_fingerprint=job,encode_job=encjob,frame_format=route.backend_id,layout=layout['layout'],page_tokens=layout.get('page_tokens',''),block_bytes=pages.block_bytes,cpu_encode_threads=effective,decode_batch_blocks=batch_size if mode.endswith('-GPU') else 1,decode_batch_kind=records[0]['decode_batch_kind'],blocks=count,verified_blocks=count,raw_bytes=raw,compressed_bytes=packed,compression_ratio=raw/packed,encode_mib_s=raw/1048576/sum(r['encode_seconds'] for r in records),decode_mib_s=raw/1048576/sum(r['decode_seconds'] for r in records),encode_page_mib_s=raw/1048576/sum(r['encode_page_seconds'] for r in records),decode_page_mib_s=raw/1048576/sum(r['decode_page_seconds'] for r in records),setup_seconds=records[0].get('setup_seconds',0),timing_version=TIMING_VERSION,encode_timing_scope='gpu_codec_call_cuda_events' if mode.startswith('GPU-') else 'cpu_codec_call_perf_counter',decode_timing_scope='gpu_codec_call_cuda_events' if mode.endswith('-GPU') else 'cpu_codec_call_perf_counter')
                 rows.append(row)
             tmp=out/'result.csv.tmp'
             with tmp.open('w',newline='',encoding='utf-8') as f:
@@ -164,7 +169,7 @@ def main():
     if not rows:raise ValueError('No completed eligible configurations')
     (out/'unavailable_codecs.json').write_text(json.dumps(omitted,indent=2))
     from benchmark_engine import write_png
-    write_png(out/'heatmap.png',rows,tuple(routes))
+    write_png(out/'heatmap.png',rows,tuple(dict.fromkeys(r['codec'] for r in rows)))
     from html_report import write_report
     write_report(out,None if args.validate_only else root/'benchmark/output/latest.html')
     print('COMPLETE',len(rows),out,flush=True)

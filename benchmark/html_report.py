@@ -45,8 +45,8 @@ def write_report(output, latest=None, compressors=None):
     notes=codec_notes(compressors or Path(__file__).resolve().parent/'compressors')
     for r in rows:
         r['codec_note']=notes.get(r['codec'],'')
-        if r.get('timing_version','').startswith('codec_call_v3'):
-            r['timing_note']='codec_call_v3：同一编码帧复用 CPU/GPU 解码；CPU 为 API 调用计时，GPU 为实际执行流 CUDA Event 计时；排除初始化、预校准、预热、传输、封装和校验。页面吞吐另计准备、封装和传输。'
+        if r.get('timing_version','').startswith(('codec_call_v3','codec_call_v4')):
+            r['timing_note']='Codec 调用：同一编码帧复用 CPU/GPU 解码；CPU 为 API 调用计时，GPU 为实际执行流 CUDA Event 计时；排除初始化、预校准、预热、传输、封装和校验。页面吞吐另计准备、封装和传输。'
         elif r.get('timing_version')=='codec_call_v2':
             r['timing_note']='codec_call_v2：CPU 调用边界计时；GPU 输入已驻留显存，使用 CUDA Event 测量实际执行流上的调用至计算完成。排除预热、H2D/D2H、结果封装与校验；调用内部必要处理和分配仍属于该 API 窗口。'
         else:
@@ -57,10 +57,13 @@ def write_report(output, latest=None, compressors=None):
             r[key]=float(r[key])
             if not math.isfinite(r[key]): raise ValueError('Nonfinite result')
         if r['blocks']!=r['verified_blocks']: raise ValueError('Incomplete verification')
-    summary='；'.join(html.escape(dataset)+': '+str(int(next(r['block_bytes'] for r in rows if r['dataset']==dataset)/1024))+' KiB / 块' for dataset in dict.fromkeys(r['dataset'] for r in rows))
+    summary='；'.join(html.escape(dataset)+': '+format(next(r['block_bytes'] for r in rows if r['dataset']==dataset)/1024,'g')+' KiB / 块' for dataset in dict.fromkeys(r['dataset'] for r in rows))
     safe_json=lambda value:json.dumps(value,ensure_ascii=False).replace('<',chr(92)+'u003c')
     values={'__ROWS__':safe_json(rows),'__CSV__':safe_json(csv_text),'__PNG__':base64.b64encode((output/'heatmap.png').read_bytes()).decode(),'__COUNT__':str(len(rows)),'__BLOCKS__':format(int(sum(r['verified_blocks'] for r in rows)),','),'__SUMMARY__':summary,'__SOURCE__':html.escape(output.name+'/result.csv'),'__TIME__':datetime.now().astimezone().isoformat(timespec='seconds')}
-    text=TEMPLATE.replace('__UNAVAILABLE__',safe_json(json.loads((output/'unavailable_codecs.json').read_text(encoding='utf-8')) if (output/'unavailable_codecs.json').exists() else {}))
+    template=TEMPLATE
+    if any(r.get('storage_dtype','bf16').startswith('fp8') for r in rows):
+        template=template.replace('BF16 KV Cache','BF16 / FP8 KV Cache')
+    text=template.replace('__UNAVAILABLE__',safe_json(json.loads((output/'unavailable_codecs.json').read_text(encoding='utf-8')) if (output/'unavailable_codecs.json').exists() else {}))
     if all(str(r.get('validation_only','')).lower()=='true' for r in rows):text=text.replace('全量压缩测试','小样本兼容性验证')
     for key,value in values.items(): text=text.replace(key,value)
     atomic_write(output/'heatmap.html',text)

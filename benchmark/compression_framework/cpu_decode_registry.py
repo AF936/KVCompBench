@@ -18,7 +18,7 @@ def resolve_decoder(route):
     identifier,size,payload=unpack_frame(frame)
     expected=route.backend_id.removeprefix('KVG1:')
     if identifier!=expected or size!=n:raise ValueError('CPU decoder frame mismatch')
-    return function(payload,n,{'dtype':'bf16'})
+    return function(payload,n,{'dtype':route.dtype})
    return decode,'module:'+entry['file']+':'+entry['function']
   return function,'module:'+entry['file']+':'+entry['function']
  raise ValueError('Unknown CPU decoder declaration')

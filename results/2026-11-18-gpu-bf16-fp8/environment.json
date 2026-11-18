@@ -1,0 +1,6 @@
+{
+  "cuda": "13.0",
+  "device": "NVIDIA GeForce RTX 5090",
+  "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+  "torch": "2.9.1+cu130"
+}
