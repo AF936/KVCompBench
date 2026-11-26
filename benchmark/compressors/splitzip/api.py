@@ -6,11 +6,11 @@ from pathlib import Path
 import sys
 from adapters.paper_support import packet,unpacket
 
-@lru_cache(maxsize=1)
-def upstream():
+@lru_cache(maxsize=2)
+def upstream(filename='codec_gpu.py'):
     from codec_manager import source_file
-    path=source_file('splitzip','codec_gpu.py')
-    spec=importlib.util.spec_from_file_location('kv_official_splitzip',path)
+    path=source_file('splitzip',filename)
+    spec=importlib.util.spec_from_file_location('kv_official_splitzip_'+path.stem,path)
     module=importlib.util.module_from_spec(spec);sys.modules[spec.name]=module;spec.loader.exec_module(module)
     return module
 
@@ -29,6 +29,9 @@ def tensor_bytes(value):return value.detach().cpu().contiguous().view(__import__
 
 
 def compress(raw,metadata):
+    if metadata.get('dtype') in ('fp8_e4m3fn','fp8_e5m2'):
+        from benchmark_routes import module_at
+        return module_at(Path(__file__).with_name('fp8_backend.py')).compress(sys.modules[__name__],raw,metadata)
     if metadata.get('dtype')!='bf16' or len(raw)%2:raise ValueError('SplitZip requires native BF16 bytes')
     torch=runtime();module=upstream();chunk=int(metadata.get('splitzip_chunk_size',1024))
     codec=module.ChunkLocalSplitZipGPU(device='cuda:0',chunk_size=chunk)
@@ -43,6 +46,9 @@ def compress(raw,metadata):
 
 
 def decompress(data,expected_bytes,metadata):
+    if metadata.get('dtype') in ('fp8_e4m3fn','fp8_e5m2'):
+        from benchmark_routes import module_at
+        return module_at(Path(__file__).with_name('fp8_backend.py')).decompress(sys.modules[__name__],data,expected_bytes,metadata)
     torch=runtime();module=upstream();header,parts=unpacket(data)
     n,esc,chunk=header['n'],header['n_esc'],header['chunk_size']
     if header['format']!='splitzip-packet-v1' or type(n)is not int or n*2!=expected_bytes or type(esc)is not int or not 0<=esc<=n:

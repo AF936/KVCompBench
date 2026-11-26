@@ -1,6 +1,6 @@
 {
   "splitzip": {
-    "zh": "基准测试在数据集首个页上校准一次并冻结码本，校准计入 setup_seconds，不计入 codec 吞吐。每帧携带码本；批量解码在计时前合并独立帧并调整 escape 偏移，然后一次调用官方解码内核。尾页的内部填充不计入原始字节数。首个页码本不是最优策略保证。",
-    "en": "Benchmark calibration is frozen on the first dataset page and reported as setup time. Frames carry the codebook. Independent frames are merged before timing and decoded by one official kernel invocation; original byte counts exclude internal tail padding."
+    "zh": "基准测试在数据集首个页上校准一次并冻结码本，校准计入 setup_seconds，不计入 codec 吞吐。每帧携带码本；批量解码在计时前合并独立帧并调整 escape 偏移，然后一次调用官方解码内核。尾页的内部填充不计入原始字节数。首个页码本不是最优策略保证。 FP8 E4M3FN 和 E5M2 分别使用 3 位和 4 位指数编码，在批次内逐页调用官方解码器，FP32 scale 原样随帧传输并计费。",
+    "en": "Benchmark calibration is frozen on the first dataset page and reported as setup time. Frames carry the codebook. Independent frames are merged before timing and decoded by one official kernel invocation; original byte counts exclude internal tail padding. FP8 uses 3-bit exponent codes for E4M3FN and 4-bit codes for E5M2, calls the official decoder per page within the timed batch, and carries FP32 scales unchanged in the frame."
   }
 }
