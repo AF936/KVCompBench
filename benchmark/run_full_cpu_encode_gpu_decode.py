@@ -76,10 +76,7 @@ def main():
         for name,route in routes.items():
             from codec_manager import identity
             installation=identity(name,gpu=route.mode.endswith('-GPU'))
-            runtime=route.runtime()
-            if hasattr(runtime, 'bind_pages'):
-                runtime.bind_pages(pages)
-            cpu=runtime.cpu_decoder()
+            runtime=route.runtime();cpu=runtime.cpu_decoder()
             modes=[route.mode]
             if route.mode.endswith('-GPU') and cpu is not None:modes.append(route.mode.split('-')[0]+'-CPU')
             capabilities.append(dict(dataset=filename,storage_dtype=pages.dtype,codec=name,original=route.mode,cpu_available=cpu is not None,frame_format=route.backend_id,batch_kind=route.options['batch_kind']))

@@ -12,14 +12,10 @@
     ],
     "by_dtype": {
       "fp8_e4m3fn": {
-        "frame_format": "splitzip-fp8-packet-v1",
-        "file": "fp8_backend.py",
-        "batch_kind": "official-per-page-batch"
+        "frame_format": "splitzip-fp8-packet-v1"
       },
       "fp8_e5m2": {
-        "frame_format": "splitzip-fp8-packet-v1",
-        "file": "fp8_backend.py",
-        "batch_kind": "official-per-page-batch"
+        "frame_format": "splitzip-fp8-packet-v1"
       }
     }
   }
